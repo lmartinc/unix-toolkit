@@ -1,0 +1,18 @@
+#
+# Unix Toolkit - Bash Configuration
+#
+
+# Load aliases
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
+
+# Load prompt
+if [ -f ~/.bash_prompt ]; then
+    source ~/.bash_prompt
+fi
+
+# Load functions
+if [ -f ~/.bash_functions ]; then
+    source ~/.bash_functions
+fi

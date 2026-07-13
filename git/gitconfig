@@ -1,0 +1,43 @@
+[user]
+    name = Lance Martincich
+    email = lmartincich@gmail.com
+
+[init]
+    defaultBranch = main
+
+[color]
+    ui = auto
+
+[core]
+    editor = vim
+
+[pull]
+    rebase = false
+
+[diff]
+    colorMoved = default
+
+[fetch]
+    prune = true
+
+[alias]
+
+    s = status
+
+    co = checkout
+
+    br = branch
+
+    lg = log --graph --decorate --oneline --all
+
+    last = log -1 HEAD
+
+    unstage = reset HEAD --
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+
+[core]
+    autocrlf = false

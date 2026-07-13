@@ -1,0 +1,7 @@
+ansible --version
+
+ansible-galaxy collection list
+
+ansible-lint
+
+yamllint .

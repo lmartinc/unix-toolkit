@@ -1,0 +1,14 @@
+---
+- name: {{ playbook_name }}
+
+  hosts: {{ hosts }}
+
+  gather_facts: true
+
+  become: true
+
+  tasks:
+
+    - name: Task description
+      ansible.builtin.debug:
+        msg: "Update me"

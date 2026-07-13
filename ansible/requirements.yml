@@ -1,0 +1,6 @@
+---
+collections:
+
+  - name: ibm.power_aix
+
+  - name: ibm.power_hmc

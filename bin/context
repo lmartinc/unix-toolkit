@@ -1,0 +1,36 @@
+#!/bin/bash
+
+echo "================================="
+echo " System Context"
+echo "================================="
+
+echo "Hostname     : $(hostname)"
+echo "User         : $(whoami)"
+echo "Architecture : $(uname -m)"
+
+case "$(uname -s)" in
+
+Linux)
+
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        echo "OS           : $PRETTY_NAME"
+    fi
+    ;;
+
+AIX)
+
+    echo "OS           : AIX"
+    echo "Version      : $(oslevel -s)"
+    ;;
+
+*)
+
+    echo "OS           : Unknown"
+
+esac
+
+echo "Kernel       : $(uname -r)"
+echo "Shell        : $SHELL"
+
+echo "================================="
