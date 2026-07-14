@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
 OS="UNKNOWN"
 VERSION="UNKNOWN"

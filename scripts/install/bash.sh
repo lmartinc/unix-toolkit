@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
 install -m 644 ../../bash/bashrc        ~/.bashrc
 install -m 644 ../../bash/aliases       ~/.bash_aliases
