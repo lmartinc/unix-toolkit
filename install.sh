@@ -10,7 +10,6 @@
 #
 #===============================================================================
 
-set -euo pipefail
 
 VERSION="0.2.0"
 
@@ -20,6 +19,8 @@ VERSION="0.2.0"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export TOOLKIT_ROOT="${SCRIPT_DIR}"
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
 ###############################################################################
 # Banner
