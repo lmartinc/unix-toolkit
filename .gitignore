@@ -1,0 +1,21 @@
+# Vim
+*.swp
+*.swo
+
+# Backup files
+*.bak
+*.old
+*~
+
+# Python
+__pycache__/
+*.pyc
+
+# Ansible
+*.retry
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
