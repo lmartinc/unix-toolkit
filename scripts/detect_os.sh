@@ -1,32 +1,74 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#
-# Detect operating system
-#
+set -euo pipefail
 
-OS=$(uname -s)
+OS="UNKNOWN"
+VERSION="UNKNOWN"
+ARCH="$(uname -m)"
 
-case "$OS" in
+case "$(uname -s)" in
 
 Linux)
 
-    if [ -f /etc/redhat-release ]; then
-        echo "RHEL"
-    elif [ -f /etc/SUSE-release ]; then
-        echo "SLES"
-    else
-        echo "Linux"
+    if [ -f /etc/os-release ]
+    then
+
+        . /etc/os-release
+
+        VERSION="${VERSION_ID}"
+
+        case "${ID}" in
+
+            rhel|redhat)
+
+                OS="RHEL"
+                ;;
+
+            rocky)
+
+                OS="Rocky"
+
+                ;;
+
+            almalinux)
+
+                OS="AlmaLinux"
+
+                ;;
+
+            sles|suse)
+
+                OS="SLES"
+
+                ;;
+
+            *)
+
+                OS="${ID}"
+
+                ;;
+
+        esac
+
     fi
+
     ;;
 
 AIX)
 
-    echo "AIX"
+    OS="AIX"
+    VERSION="$(oslevel -s)"
+
     ;;
 
 *)
 
-    echo "UNKNOWN"
     ;;
 
 esac
+
+export TOOLKIT_OS="${OS}"
+export TOOLKIT_VERSION="${VERSION}"
+export TOOLKIT_ARCH="${ARCH}"
+
+echo "${OS}"

@@ -4,3 +4,7 @@ collections:
   - name: ibm.power_aix
 
   - name: ibm.power_hmc
+
+  - name: ansible.posix
+
+  - name: community.general
