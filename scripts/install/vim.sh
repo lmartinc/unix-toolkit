@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
 install -m 644 ../../vim/vimrc ~/.vimrc

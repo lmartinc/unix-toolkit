@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source "${TOOLKIT_ROOT}/lib/common.sh"
 DIRS="
 $HOME/git
 $HOME/bin

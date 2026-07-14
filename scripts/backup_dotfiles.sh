@@ -2,7 +2,8 @@
 
 #
 # Backup existing configuration files
-#
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
 BACKUP_DIR="$HOME/.unix-toolkit-backup-$(date +%Y%m%d%H%M%S)"
 
