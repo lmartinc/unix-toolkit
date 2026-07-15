@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+#
+#===============================================================================
+#
+# Name        : network-discover
+#
+# Description : Discover hosts on a network and generate inventory files.
+#
+# Author      : Lance Martincich
+#
+#===============================================================================
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
+
+###############################################################################
+# Main
+###############################################################################
+
+main()
+{
+    require_command nmap
+    require_command dig
+    require_command awk
+
+    local subnet="${1:-172.25.1.0/24}"
+    local subnet_name
+    local timestamp
+
+    subnet_name="$(echo "${subnet}" | tr '/' '_')"
+    timestamp="$(date +%Y%m%d_%H%M%S)"
+
+    local outdir="${HOME}/unix-toolkit-data/network/${timestamp}"
+
+    mkdir -p "${outdir}/nmap"
+
+    local hosts_file="${outdir}/${subnet_name}_hosts.txt"
+    local csv_file="${outdir}/${subnet_name}_inventory.csv"
+    local xml_file="${outdir}/${subnet_name}.xml"
+    local services_file="${outdir}/services.txt"
+
+    log_info "Network Discovery"
+    log_info "Subnet : ${subnet}"
+    log_info "Output : ${outdir}"
+
+    echo "# Generated $(date)" > "${hosts_file}"
+    echo "IP,Hostname,MAC,Vendor" > "${csv_file}"
+
+    log_info "Running discovery scan..."
+
+    nmap \
+        -sn \
+        -oX "${xml_file}" \
+        "${subnet}" >/dev/null
+
+    local hosts
+
+    hosts="$(nmap -sn "${subnet}" -oG - | awk '/Up$/{print $2}')"
+
+    while read -r ip
+    do
+        [[ -z "${ip}" ]] && continue
+
+        hostname="$(dig +short -x "${ip}" | sed 's/\.$//' | head -1)"
+
+        [[ -z "${hostname}" ]] && hostname="unknown"
+
+        mac="$(nmap -sn "${ip}" | awk '/MAC Address/ {print $3}')"
+
+        vendor="$(nmap -sn "${ip}" | awk -F'[()]' '/MAC Address/ {print $2}')"
+
+        printf "%-15s %s\n" "${ip}" "${hostname}" >> "${hosts_file}"
+
+        printf "%s,%s,%s,%s\n" \
+            "${ip}" \
+            "${hostname}" \
+            "${mac}" \
+            "${vendor}" >> "${csv_file}"
+
+        log_ok "${ip} ${hostname}"
+
+    done <<< "${hosts}"
+
+    log_info "Running service scan..."
+
+    nmap \
+        -sV \
+        -p 22,443,5988,5989 \
+        "${subnet}" \
+        -oN "${services_file}" >/dev/null
+
+    echo
+    log_ok "Discovery completed"
+
+    echo
+    echo "Results:"
+    echo "    ${outdir}"
+    echo
+}
+
+main "$@"

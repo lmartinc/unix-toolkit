@@ -90,3 +90,15 @@ install_file()
 
     log_ok "$(basename "${destination}")"
 }
+
+install_cmd()
+{
+    local source="$1"
+    local destination="$2"
+
+    install -m 755 \
+        "${source}" \
+        "${destination}"
+
+    log_ok "$(basename "${destination}")"
+}
