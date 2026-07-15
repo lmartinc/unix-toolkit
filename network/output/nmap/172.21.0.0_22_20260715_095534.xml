@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.92 scan initiated Wed Jul 15 09:55:34 2026 as: nmap -sn -oX ./output/nmap/172.21.0.0_22_20260715_095534.xml 172.21.0.0/22 -->
+<nmaprun scanner="nmap" args="nmap -sn -oX ./output/nmap/172.21.0.0_22_20260715_095534.xml 172.21.0.0/22" start="1784102134" startstr="Wed Jul 15 09:55:34 2026" version="7.92" xmloutputversion="1.05">
+<verbose level="0"/>
+<debugging level="0"/>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.14" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="571" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.15" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="507" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.16" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nbipap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="1828" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.17" addrtype="ipv4"/>
+<hostnames>
+<hostname name="contentp4.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="1091" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.26" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="936" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.65" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e982vioa.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="656" rttvar="3752" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.66" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e982viob.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="857" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.70" addrtype="ipv4"/>
+<hostnames>
+<hostname name="ep8vio1a.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="724" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.71" addrtype="ipv4"/>
+<hostnames>
+<hostname name="ep8vio1b.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="640" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.72" addrtype="ipv4"/>
+<hostnames>
+<hostname name="prdnim" type="PTR"/>
+</hostnames>
+<times srtt="804" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.74" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="896" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.76" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="645" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.78" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="948" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.80" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="781" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.81" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e82vio1a.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="698" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.83" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e82vio1b.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="672" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.84" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e981vioa.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="605" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.86" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nbipdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="625" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.88" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nbipci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="508" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.90" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nbipap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="612" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.92" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="668" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.94" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="715" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.95" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e981viob.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="716" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.96" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="858" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.97" addrtype="ipv4"/>
+<hostnames>
+<hostname name="idpci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="598" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.98" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nxpci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="627" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.99" addrtype="ipv4"/>
+<hostnames>
+<hostname name="idpdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="912" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.100" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nxpap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="826" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.102" addrtype="ipv4"/>
+<hostnames>
+<hostname name="solman1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="1155" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.103" addrtype="ipv4"/>
+<hostnames>
+<hostname name="soldb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="1057" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.104" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap04.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="951" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.110" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nxpap04.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="827" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.111" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppap06.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="743" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.112" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cityftps.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="537" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.113" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcpap04-s" type="PTR"/>
+</hostnames>
+<times srtt="875" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.114" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcpap05-s" type="PTR"/>
+</hostnames>
+<times srtt="789" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.115" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppap07.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="696" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.119" addrtype="ipv4"/>
+<hostnames>
+<hostname name="popci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="584" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.120" addrtype="ipv4"/>
+<hostnames>
+<hostname name="popdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="484" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.122" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap05.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="682" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.123" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcpdb02-1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="617" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.133" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="675" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.134" addrtype="ipv4"/>
+<hostnames>
+<hostname name="crpdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="606" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.136" addrtype="ipv4"/>
+<hostnames>
+<hostname name="crpci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="927" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.138" addrtype="ipv4"/>
+<hostnames>
+<hostname name="crpap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="579" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.142" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tmrci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="588" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.143" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="849" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.144" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tmrap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="765" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.145" addrtype="ipv4"/>
+<hostnames>
+<hostname name="napci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="636" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.146" addrtype="ipv4"/>
+<hostnames>
+<hostname name="grpdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="475" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.147" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tmrap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="781" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.148" addrtype="ipv4"/>
+<hostnames>
+<hostname name="grpci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="691" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.150" addrtype="ipv4"/>
+<hostnames>
+<hostname name="et81vioa.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="769" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.151" addrtype="ipv4"/>
+<hostnames>
+<hostname name="et81viob.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="669" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.154" addrtype="ipv4"/>
+<hostnames>
+<hostname name="et82vioa.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="603" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.155" addrtype="ipv4"/>
+<hostnames>
+<hostname name="et82viob.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="502" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.156" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bppdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="536" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.158" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bppci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="706" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.160" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bipdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="715" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.162" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bipci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="651" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.163" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eapap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="602" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.164" addrtype="ipv4"/>
+<hostnames>
+<hostname name="rp1backfe.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="655" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.166" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="580" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.167" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eppap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="705" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.168" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tmrdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="487" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.170" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppap05.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="525" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.171" addrtype="ipv4"/>
+<hostnames>
+<hostname name="neppap04.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="599" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.172" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bipap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="1015" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.173" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bipap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="931" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.174" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bipap04.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="662" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.175" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cshprddb-tst" type="PTR"/>
+</hostnames>
+<times srtt="579" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.176" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cshprdap-tst" type="PTR"/>
+</hostnames>
+<times srtt="531" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.177" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cprbackfe.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="812" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.178" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nxpbackfe.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="717" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.179" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tmrbackfe.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="1005" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.183" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xopdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="535" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.184" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xopci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="884" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.185" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xopap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="797" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.187" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eppdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="624" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.188" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eppap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="804" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.189" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eapdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="705" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.192" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cshprddb" type="PTR"/>
+</hostnames>
+<times srtt="563" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.194" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cshprdap" type="PTR"/>
+</hostnames>
+<times srtt="629" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.196" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eapci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="573" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.198" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eppci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="586" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.201" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="2956" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.202" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="3832" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.203" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="2682" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.204" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap06.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="813" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.206" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="4298" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.207" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="6508" rttvar="6508" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.208" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="8358" rttvar="8358" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.209" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="7654" rttvar="7654" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.220" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nxpdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="822" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.223" addrtype="ipv4"/>
+<hostnames>
+<hostname name="cdirect1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="542" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.224" addrtype="ipv4"/>
+<hostnames>
+<hostname name="crpap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="827" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.225" addrtype="ipv4"/>
+<hostnames>
+<hostname name="nxpap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="682" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.226" addrtype="ipv4"/>
+<hostnames>
+<hostname name="solap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="513" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.227" addrtype="ipv4"/>
+<hostnames>
+<hostname name="crpap04.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="636" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.236" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xipci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="556" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.237" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xipdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="896" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.238" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xipap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="832" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.239" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xipap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="782" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.240" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap12.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="524" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.241" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap13.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="889" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.242" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap11.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="661" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.243" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap07.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="611" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.244" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap08.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="706" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.245" addrtype="ipv4"/>
+<hostnames>
+<hostname name="mopdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="724" rttvar="3753" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.246" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcpci01-s" type="PTR"/>
+</hostnames>
+<times srtt="554" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.247" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcpap02-s" type="PTR"/>
+</hostnames>
+<times srtt="843" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.248" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcpap03-s" type="PTR"/>
+</hostnames>
+<times srtt="640" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.249" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap10.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="746" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.0.250" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap09.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="739" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.101" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="506" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.176" addrtype="ipv4"/>
+<hostnames>
+<hostname name="contentp1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="884" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.178" addrtype="ipv4"/>
+<hostnames>
+<hostname name="contentp2.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="696" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.179" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="979" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.180" addrtype="ipv4"/>
+<hostnames>
+<hostname name="contentp3.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="889" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.182" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xc1ci01-2.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="692" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.183" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xc1ap02-2.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="954" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.184" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xc1db02-2.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="862" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="syn-ack" reason_ttl="0"/>
+<address addr="172.21.1.233" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tomprd1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="578" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.1.249" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xcontp01" type="PTR"/>
+</hostnames>
+<times srtt="716" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.50" addrtype="ipv4"/>
+<hostnames>
+<hostname name="tc2db02-1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="888" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.89" addrtype="ipv4"/>
+<hostnames>
+<hostname name="napdb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="635" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.92" addrtype="ipv4"/>
+<hostnames>
+<hostname name="npadb01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="763" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.93" addrtype="ipv4"/>
+<hostnames>
+<hostname name="npaci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="941" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.95" addrtype="ipv4"/>
+<hostnames>
+<hostname name="npaap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="902" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.97" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bwpdb01-p.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="588" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.98" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bwpci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="962" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.99" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bwpap02.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="869" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.100" addrtype="ipv4"/>
+<hostnames>
+<hostname name="bwpap03.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="784" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.184" addrtype="ipv4"/>
+<hostnames>
+<hostname name="xc1db02-1.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="839" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.185" addrtype="ipv4"/>
+<hostnames>
+<hostname name="napdb01-dr" type="PTR"/>
+</hostnames>
+<times srtt="752" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.186" addrtype="ipv4"/>
+<hostnames>
+<hostname name="napci01-dr" type="PTR"/>
+</hostnames>
+<times srtt="666" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.2.220" addrtype="ipv4"/>
+<hostnames>
+<hostname name="lvpci01.capetown.gov.za" type="PTR"/>
+</hostnames>
+<times srtt="775" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.78" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap02-dr" type="PTR"/>
+</hostnames>
+<times srtt="885" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.80" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap03-dr" type="PTR"/>
+</hostnames>
+<times srtt="718" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.104" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<times srtt="887" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.122" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap05-dr" type="PTR"/>
+</hostnames>
+<times srtt="638" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.187" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eppdb01-dr" type="PTR"/>
+</hostnames>
+<times srtt="838" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.198" addrtype="ipv4"/>
+<hostnames>
+<hostname name="eppci01-dr" type="PTR"/>
+</hostnames>
+<times srtt="545" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.204" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap06-dr" type="PTR"/>
+</hostnames>
+<times srtt="668" rttvar="5000" to="100000"/>
+</host>
+<host><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="172.21.3.243" addrtype="ipv4"/>
+<hostnames>
+<hostname name="r3pap07-dr" type="PTR"/>
+</hostnames>
+<times srtt="729" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1784102146" timestr="Wed Jul 15 09:55:46 2026" summary="Nmap done at Wed Jul 15 09:55:46 2026; 1024 IP addresses (145 hosts up) scanned in 11.55 seconds" elapsed="11.55" exit="success"/><hosts up="145" down="879" total="1024"/>
+</runstats>
+</nmaprun>
