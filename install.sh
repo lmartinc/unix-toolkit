@@ -70,28 +70,28 @@ main()
         "${TOOLKIT_ROOT}/scripts/detect_os.sh"
 
     run_step "Backing up configuration" \
-        "${TOOLKIT_ROOT}/scripts/backup_dotfiles.sh"
+        "${TOOLKIT_ROOT}/bin/backup_dotfiles"
 
     run_step "Creating directories" \
         "${TOOLKIT_ROOT}/scripts/create_dirs.sh"
 
     run_step "Installing packages" \
-        "${TOOLKIT_ROOT}/scripts/install/packages.sh"
+        "${TOOLKIT_ROOT}/scripts/modules/packages.sh"
 
     run_step "Installing Bash" \
-        "${TOOLKIT_ROOT}/scripts/install/bash.sh"
+        "${TOOLKIT_ROOT}/scripts/modules/bash.sh"
 
     run_step "Installing Vim" \
-        "${TOOLKIT_ROOT}/scripts/install/vim.sh"
+        "${TOOLKIT_ROOT}/scripts/modules/vim.sh"
 
     run_step "Installing Git" \
-        "${TOOLKIT_ROOT}/scripts/install/git.sh"
+        "${TOOLKIT_ROOT}/scripts/modules/git.sh"
 
     run_step "Installing personal commands" \
-        "${TOOLKIT_ROOT}/scripts/install/bin.sh"
+        "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
 
     run_step "Installing Ansible configuration" \
-        "${TOOLKIT_ROOT}/scripts/install/ansible.sh"
+        "${TOOLKIT_ROOT}/scripts/modules/ansible.sh"
 
     echo
     echo "Installation completed successfully."

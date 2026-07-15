@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
+
+###############################################################################
+# Main
+###############################################################################
+
+main()
+{
+    if [[ $# -ne 1 ]]
+    then
+        echo "Usage: mkscript <script-name>"
+        exit 1
+    fi
+
+    local SCRIPT_NAME="$1"
+    local TEMPLATE="${TOOLKIT_ROOT}/templates/script.sh"
+
+    if [[ ! -f "${TEMPLATE}" ]]
+    then
+        echo "Template not found:"
+        echo "    ${TEMPLATE}"
+        exit 1
+    fi
+
+    cp "${TEMPLATE}" "${SCRIPT_NAME}"
+
+    sed -i \
+        -e "s/__SCRIPT_NAME__/${SCRIPT_NAME}/g" \
+        -e "s/__DATE__/$(date +%Y-%m-%d)/g" \
+        "${SCRIPT_NAME}"
+
+    chmod 755 "${SCRIPT_NAME}"
+
+    echo
+    echo "Created ${SCRIPT_NAME}"
+    echo
+}
+main "$@"
