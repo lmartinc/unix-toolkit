@@ -10,9 +10,6 @@
 #
 #===============================================================================
 
-
-VERSION="0.2.0"
-
 ###############################################################################
 # Toolkit paths
 ###############################################################################
@@ -22,40 +19,44 @@ export TOOLKIT_ROOT="${SCRIPT_DIR}"
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
 
+VERSION="$(<"${TOOLKIT_ROOT}/VERSION")"
+
 ###############################################################################
-# Banner
+# Display banner
 ###############################################################################
 
-banner()
+show_banner()
 {
 cat <<EOF
 
 ============================================================
                  Unix Toolkit Installer
-                      Version ${VERSION}
+============================================================
+
+Version : ${VERSION}
+
 ============================================================
 
 EOF
 }
 
 ###############################################################################
-# Run an installation step
+# Display installation summary
 ###############################################################################
 
-run_step()
+show_summary()
 {
-    local DESCRIPTION="$1"
-    local SCRIPT="$2"
+cat <<EOF
 
-    printf "%-40s" "${DESCRIPTION}"
+============================================================
+ Installation completed successfully.
+============================================================
 
-    if "${SCRIPT}" >/dev/null 2>&1
-    then
-        echo "[ OK ]"
-    else
-        echo "[FAIL]"
-        exit 1
-    fi
+Restart your shell or run:
+
+    source ~/.bashrc
+
+EOF
 }
 
 ###############################################################################
@@ -64,7 +65,9 @@ run_step()
 
 main()
 {
-    banner
+    show_banner
+
+    show_environment
 
     run_step "Detecting operating system" \
         "${TOOLKIT_ROOT}/scripts/detect_os.sh"
@@ -72,32 +75,26 @@ main()
     run_step "Creating directories" \
         "${TOOLKIT_ROOT}/scripts/create_dirs.sh"
 
-    run_step "Installing packages" \
+    run_step "Installing system packages" \
         "${TOOLKIT_ROOT}/scripts/modules/packages.sh"
 
-    run_step "Installing Bash" \
-        "${TOOLKIT_ROOT}/scripts/modules/bash.sh"
-
-    run_step "Installing Vim" \
-        "${TOOLKIT_ROOT}/scripts/modules/vim.sh"
-
-    run_step "Installing Git" \
+    run_step "Installing Git configuration" \
         "${TOOLKIT_ROOT}/scripts/modules/git.sh"
 
-    run_step "Installing toolkit commands" \
-        "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
+    run_step "Installing Bash configuration" \
+        "${TOOLKIT_ROOT}/scripts/modules/bash.sh"
+
+    run_step "Installing Vim configuration" \
+        "${TOOLKIT_ROOT}/scripts/modules/vim.sh"
 
     run_step "Installing Ansible configuration" \
         "${TOOLKIT_ROOT}/scripts/modules/ansible.sh"
 
-    log_ok "Unix toolkit installation completed."
-    echo
-    echo "Installation completed successfully."
-    echo
-    echo "Restart your shell or run:"
-    echo
-    echo "    source ~/.bashrc"
-    echo
+    run_step "Installing toolkit commands" \
+        "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
+
+    show_summary
 }
 
 main "$@"
+

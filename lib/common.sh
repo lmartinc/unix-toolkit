@@ -1,40 +1,34 @@
 #!/usr/bin/env bash
-#
-#===============================================================================
-#
-# Unix Toolkit - Common Library
-#
-# Shared functions used throughout the toolkit.
-#
-#===============================================================================
+
+###############################################################################
+# Common functions
+###############################################################################
 
 set -euo pipefail
 
 ###############################################################################
-# Error Handling
+# Error handling
 ###############################################################################
+
+trap 'error_handler ${LINENO} "${BASH_COMMAND}"' ERR
 
 error_handler()
 {
-    local exit_code=$?
     local line="$1"
     local command="$2"
 
     echo
     echo "============================================================"
     echo "ERROR"
-    echo "============================================================"
-    echo " Script   : ${BASH_SOURCE[1]}"
-    echo " Line     : ${line}"
-    echo " Command  : ${command}"
-    echo " Exit Code: ${exit_code}"
-    echo "============================================================"
     echo
+    echo " Script  : ${BASH_SOURCE[1]}"
+    echo " Line    : ${line}"
+    echo " Command : ${command}"
+    echo
+    echo "============================================================"
 
-    exit "${exit_code}"
+    exit 1
 }
-
-trap 'error_handler ${LINENO} "${BASH_COMMAND}"' ERR
 
 ###############################################################################
 # Logging
@@ -57,41 +51,64 @@ log_warn()
 
 log_error()
 {
-    printf "[FAIL] %s\n" "$*" >&2
+    printf "[FAIL] %s\n" "$*"
 }
 
 ###############################################################################
-# Utility Functions
+# Display environment
 ###############################################################################
 
-require_command()
+show_environment()
 {
-    command -v "$1" >/dev/null 2>&1 || {
-        log_error "Required command not found: $1"
+    echo "User      : ${USER}"
+    echo "Hostname  : $(hostname)"
+    echo "Toolkit   : ${TOOLKIT_ROOT}"
+    echo
+}
+
+###############################################################################
+# Run installer step
+###############################################################################
+
+run_step()
+{
+    local description="$1"
+    local script="$2"
+
+    printf "%-40s" "${description}"
+
+    if "${script}" >/dev/null 2>&1
+    then
+        printf "[ OK ]\n"
+    else
+        printf "[FAIL]\n"
         exit 1
-    }
-}
-
-backup_file()
-{
-    local file="$1"
-
-    if [[ -f "${file}" ]]; then
-        cp -p "${file}" "${file}.$(date +%Y%m%d-%H%M%S).bak"
     fi
 }
+
+###############################################################################
+# Install configuration file
+###############################################################################
 
 install_file()
 {
     local source="$1"
     local destination="$2"
 
-    install -m 644 "${source}" "${destination}"
+    backup_file "${destination}"
+
+    install -m 644 \
+        "${source}" \
+        "${destination}"
 
     log_ok "$(basename "${destination}")"
 }
 
-install_cmd()
+###############################################################################
+# Install executable
+###############################################################################
+
+install_command()
 {
     local source="$1"
     local destination="$2"
@@ -101,4 +118,36 @@ install_cmd()
         "${destination}"
 
     log_ok "$(basename "${destination}")"
+}
+
+###############################################################################
+# Backup existing file
+###############################################################################
+
+backup_file()
+{
+    local file="$1"
+
+    if [[ -f "${file}" ]]
+    then
+        cp "${file}" "${file}.$(date +%Y%m%d-%H%M%S).bak"
+
+        log_info "Backed up $(basename "${file}")"
+    fi
+}
+
+###############################################################################
+# Verify command exists
+###############################################################################
+
+require_command()
+{
+    local command="$1"
+
+    command -v "${command}" >/dev/null 2>&1 ||
+    {
+        log_error "${command} is not installed."
+
+        exit 1
+    }
 }
