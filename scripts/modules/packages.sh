@@ -5,8 +5,6 @@ TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
 
-PLATFORM=$(../detect_os.sh)
-
 case "${PLATFORM}" in
 
 RHEL)

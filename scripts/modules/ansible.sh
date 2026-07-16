@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+###############################################################################
+# Install Ansible configuration
+###############################################################################
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
+
+log_info "Installing Ansible configuration..."
 
 mkdir -p "${HOME}/.config/ansible"
 
@@ -18,3 +24,5 @@ install_file \
 install_file \
     "${TOOLKIT_ROOT}/ansible/ansible-lint.yml" \
     "${HOME}/.config/ansible/ansible-lint.yml"
+
+log_ok "Ansible configuration installed."

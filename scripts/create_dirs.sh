@@ -1,20 +1,33 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+###############################################################################
+# Create user directories
+###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
 
-DIRS="
-$HOME/git
-$HOME/bin
-$HOME/tmp
-"
+###############################################################################
+# Directories
+###############################################################################
 
-for DIR in $DIRS
+DIRS=(
+    "${HOME}/git"
+    "${HOME}/bin"
+    "${HOME}/tmp"
+)
+
+###############################################################################
+# Create directories
+###############################################################################
+
+for DIR in "${DIRS[@]}"
 do
-    if [ ! -d "$DIR" ]; then
-        mkdir -p "$DIR"
-        echo "Created $DIR"
+    if [[ ! -d "${DIR}" ]]
+    then
+        mkdir -p "${DIR}"
+        log_ok "Created ${DIR}"
     fi
 done

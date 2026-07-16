@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+###############################################################################
+# Install Bash configuration
+###############################################################################
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
@@ -20,3 +24,5 @@ install_file \
 install_file \
     "${TOOLKIT_ROOT}/bash/functions" \
     "${HOME}/.bash_functions"
+
+log_ok "Bash configuration installed."

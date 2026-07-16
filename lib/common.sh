@@ -62,6 +62,7 @@ show_environment()
 {
     echo "User      : ${USER}"
     echo "Hostname  : $(hostname)"
+    echo "Platform  : ${PLATFORM}"
     echo "Toolkit   : ${TOOLKIT_ROOT}"
     echo
 }
@@ -157,4 +158,46 @@ require_command()
 
         exit 1
     }
+}
+
+detect_platform()
+{
+    local platform="UNKNOWN"
+
+    case "$(uname -s)" in
+
+    Linux)
+
+        if [[ -f /etc/os-release ]]
+        then
+            source /etc/os-release
+
+            case "${ID}" in
+
+                rhel|redhat|rocky|almalinux)
+                    platform="RHEL"
+                    ;;
+
+                sles|suse)
+                    platform="SLES"
+                    ;;
+
+                *)
+                    platform="${ID}"
+                    ;;
+
+            esac
+        fi
+
+        ;;
+
+    AIX)
+
+        platform="AIX"
+
+        ;;
+
+    esac
+
+    echo "${platform}"
 }
