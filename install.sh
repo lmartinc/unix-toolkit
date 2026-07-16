@@ -20,6 +20,9 @@ export TOOLKIT_ROOT="${SCRIPT_DIR}"
 source "${TOOLKIT_ROOT}/lib/common.sh"
 
 VERSION="$(<"${TOOLKIT_ROOT}/VERSION")"
+VERBOSE=false
+DRY_RUN=false
+PROFILE="default"
 
 ###############################################################################
 # Display banner
@@ -63,12 +66,64 @@ EOF
 # Main
 ###############################################################################
 
-main()
+
+show_help()
 {
-    show_banner
+cat <<EOF
 
-    show_environment
+Unix Toolkit Installer
 
+Usage:
+
+    ./install.sh [OPTIONS]
+
+Options
+
+    -h, --help        Show this help message
+    -v, --verbose     Show module output
+    -n, --dry-run     Show what would be installed
+    -V, --version     Display toolkit version
+
+EOF
+}
+
+parse_arguments()
+{
+    while [[ $# -gt 0 ]]
+    do
+        case "$1" in
+
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+
+            -V|--version)
+                echo "${VERSION}"
+                exit 0
+                ;;
+
+            -v|--verbose)
+                VERBOSE=true
+                ;;
+
+            -n|--dry-run)
+                DRY_RUN=true
+                ;;
+
+            *)
+                log_error "Unknown option: $1"
+                exit 1
+                ;;
+
+        esac
+
+        shift
+    done
+}
+
+install_all()
+{
     run_step "Detecting operating system" \
         "${TOOLKIT_ROOT}/scripts/detect_os.sh"
 
@@ -92,6 +147,17 @@ main()
 
     run_step "Installing toolkit commands" \
         "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
+}
+
+main()
+{
+    parse_arguments "$@"
+
+    show_banner
+
+    show_environment
+ 
+    install_all
 
     show_summary
 }

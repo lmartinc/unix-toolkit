@@ -77,13 +77,20 @@ run_step()
 
     printf "%-40s" "${description}"
 
-    if "${script}" >/dev/null 2>&1
+    if ${DRY_RUN}
     then
-        printf "[ OK ]\n"
-    else
-        printf "[FAIL]\n"
-        exit 1
+        printf "[SKIP]\n"
+        return
     fi
+
+    if ${VERBOSE}
+    then
+        "${script}"
+    else
+        "${script}" >/dev/null 2>&1
+    fi
+
+    printf "[ OK ]\n"
 }
 
 ###############################################################################
