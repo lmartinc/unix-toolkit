@@ -69,9 +69,6 @@ main()
     run_step "Detecting operating system" \
         "${TOOLKIT_ROOT}/scripts/detect_os.sh"
 
-    run_step "Backing up configuration" \
-        "${TOOLKIT_ROOT}/bin/backup_dotfiles"
-
     run_step "Creating directories" \
         "${TOOLKIT_ROOT}/scripts/create_dirs.sh"
 
@@ -87,12 +84,13 @@ main()
     run_step "Installing Git" \
         "${TOOLKIT_ROOT}/scripts/modules/git.sh"
 
-    run_step "Installing personal commands" \
+    run_step "Installing toolkit commands" \
         "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
 
     run_step "Installing Ansible configuration" \
         "${TOOLKIT_ROOT}/scripts/modules/ansible.sh"
 
+    log_ok "Unix toolkit installation completed."
     echo
     echo "Installation completed successfully."
     echo
