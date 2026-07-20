@@ -38,12 +38,9 @@ show_banner()
 cat <<EOF
 
 ============================================================
-                 Unix Toolkit Installer
+                 Unix Toolkit Installer v${VERSION}
 ============================================================
 
-Version : ${VERSION}
-
-============================================================
 
 EOF
 }
@@ -54,12 +51,16 @@ EOF
 
 show_summary()
 {
+
+END_TIME=$(date +%s)
+ELAPSED=$((END_TIME - START_TIME))
 cat <<EOF
 
 ============================================================
  Installation completed successfully.
 ============================================================
 
+Elapsed time: ${ELAPSED}
 Restart your shell or run:
 
     source ~/.bashrc
@@ -156,6 +157,8 @@ install_all()
 
 main()
 {
+    START_TIME=$(date +%s)
+
     parse_arguments "$@"
 
     show_banner
