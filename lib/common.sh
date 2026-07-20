@@ -65,6 +65,8 @@ show_environment()
     echo "Platform  : ${PLATFORM}"
     echo "Toolkit   : ${TOOLKIT_ROOT}"
     echo
+    separator
+    echo
 }
 
 ###############################################################################
@@ -222,4 +224,13 @@ require_command()
         log_error "Required command not found: $1"
         exit 1
     fi
+}
+
+###############################################################################
+# Separator
+###############################################################################
+
+separator()
+{
+    printf '%*s\n' 60 '' | tr ' ' '-'
 }
