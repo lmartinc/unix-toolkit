@@ -1,9 +1,36 @@
 #!/usr/bin/env bash
 
+###############################################################################
+#
+# Name        : mkscript
+#
+# Description : Create a new shell script from the Unix Toolkit template
+#
+###############################################################################
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
+
+###############################################################################
+# Usage
+###############################################################################
+
+usage()
+{
+    cat <<EOF
+
+Usage:
+    mkscript <script-name>
+
+Example:
+    mkscript backup_oracle
+
+Creates a new shell script using the Unix Toolkit template.
+
+EOF
+}
 
 ###############################################################################
 # Main
@@ -11,33 +38,63 @@ source "${TOOLKIT_ROOT}/lib/common.sh"
 
 main()
 {
+    case "${1:-}" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+    esac
+
     if [[ $# -ne 1 ]]
     then
-        echo "Usage: mkscript <script-name>"
+        usage
         exit 1
     fi
 
+    require_command sed
+
     local SCRIPT_NAME="$1"
-    local TEMPLATE="${TOOLKIT_ROOT}/templates/script.sh"
+    local TEMPLATE_DIR="${TOOLKIT_ROOT}/templates"
+    local TEMPLATE="${TEMPLATE_DIR}/script.sh"
 
     if [[ ! -f "${TEMPLATE}" ]]
     then
-        echo "Template not found:"
+        log_error "Template not found:"
         echo "    ${TEMPLATE}"
+        exit 1
+    fi
+
+    if [[ -e "${SCRIPT_NAME}" ]]
+    then
+        log_error "File already exists:"
+        echo "    ${SCRIPT_NAME}"
         exit 1
     fi
 
     cp "${TEMPLATE}" "${SCRIPT_NAME}"
 
     sed -i \
-        -e "s/__SCRIPT_NAME__/${SCRIPT_NAME}/g" \
+        -e "s/__SCRIPT_NAME__/$(basename "${SCRIPT_NAME}")/g" \
         -e "s/__DATE__/$(date +%Y-%m-%d)/g" \
         "${SCRIPT_NAME}"
 
     chmod 755 "${SCRIPT_NAME}"
 
+    log_ok "Created script"
+
+    if command_exists realpath
+    then
+        echo
+        echo "    $(realpath "${SCRIPT_NAME}")"
+    else
+        echo
+        echo "    $(pwd)/${SCRIPT_NAME}"
+    fi
+
     echo
-    echo "Created ${SCRIPT_NAME}"
+    echo "Next step:"
+    echo "    Edit the Description section before using the script."
     echo
 }
+
 main "$@"

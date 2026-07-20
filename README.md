@@ -84,3 +84,11 @@ unix-toolkit/
 ├── templates/
 └── vim/
 
+##Toolkit Commands
+
+mkscript      Create a new shell script from the standard template
+mkrole        Create a standard Ansible role
+mkplaybook    Create a new Ansible playbook      
+git-sync      Synchronise a Git repository       (planned)
+network-discover  Discover hosts on a network    (available)
+ans-check     Verify Ansible installation        (available)

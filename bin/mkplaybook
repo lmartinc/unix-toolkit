@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+###############################################################################
+#
+# Name        : mkplaybook
+#
+# Description : Create a new Ansible playbook
+#
+###############################################################################
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
+
+###############################################################################
+# Usage
+###############################################################################
+
+usage()
+{
+cat <<EOF
+
+Usage:
+
+    mkplaybook <playbook-name>
+
+Example:
+
+    mkplaybook patch_aix
+
+Creates a new Ansible playbook.
+
+EOF
+}
+
+###############################################################################
+# Main
+###############################################################################
+
+main()
+{
+    case "${1:-}" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+    esac
+
+    if [[ $# -ne 1 ]]
+    then
+        usage
+        exit 1
+    fi
+
+    local NAME="$1"
+
+    #
+    # Append .yml if omitted
+    #
+    [[ "${NAME}" != *.yml ]] && NAME="${NAME}.yml"
+
+    local PLAYBOOK_DIR
+
+    #
+    # If inside an Ansible project, use playbooks/
+    #
+    if [[ -d "./playbooks" ]]
+    then
+        PLAYBOOK_DIR="./playbooks"
+    else
+        PLAYBOOK_DIR="."
+    fi
+
+    local PLAYBOOK="${PLAYBOOK_DIR}/${NAME}"
+
+    if [[ -f "${PLAYBOOK}" ]]
+    then
+        log_error "Playbook already exists."
+        echo "    ${PLAYBOOK}"
+        exit 1
+    fi
+
+    cat > "${PLAYBOOK}" <<EOF
+---
+###############################################################################
+#
+# Name        : ${NAME}
+#
+# Description :
+#
+###############################################################################
+
+- name: ${NAME%.yml}
+  hosts: all
+  gather_facts: true
+  become: false
+
+  tasks:
+
+    - name: Example task
+      ansible.builtin.debug:
+        msg: "Hello from ${NAME%.yml}"
+EOF
+
+    log_ok "Created playbook"
+
+    echo
+
+    if command_exists realpath
+    then
+        echo "    $(realpath "${PLAYBOOK}")"
+    else
+        echo "    ${PLAYBOOK}"
+    fi
+
+    echo
+}
+
+main "$@"

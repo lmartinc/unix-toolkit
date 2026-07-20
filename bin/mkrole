@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+###############################################################################
+#
+# Name        : mkrole
+#
+# Description : Create a new Ansible role
+#
+###############################################################################
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
+
+###############################################################################
+# Usage
+###############################################################################
+
+usage()
+{
+cat <<EOF
+
+Usage:
+
+    mkrole <role-name>
+
+Example:
+
+    mkrole aix_patch
+
+EOF
+}
+
+###############################################################################
+# Main
+###############################################################################
+
+main()
+{
+    case "${1:-}" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+    esac
+
+    if [[ $# -ne 1 ]]
+    then
+        usage
+        exit 1
+    fi
+
+    local ROLE="$1"
+
+    if [[ -d "${ROLE}" ]]
+    then
+        log_error "Role already exists."
+        exit 1
+    fi
+
+    mkdir -p \
+        "${ROLE}"/{defaults,files,handlers,meta,tasks,templates,tests,vars}
+
+    touch "${ROLE}/defaults/main.yml"
+    touch "${ROLE}/handlers/main.yml"
+    touch "${ROLE}/meta/main.yml"
+    touch "${ROLE}/tasks/main.yml"
+    touch "${ROLE}/vars/main.yml"
+
+    cat > "${ROLE}/README.md" <<EOF
+# ${ROLE}
+
+## Description
+
+TODO
+
+## Variables
+
+TODO
+
+## Example
+
+\`\`\`yaml
+- hosts: all
+
+  roles:
+    - ${ROLE}
+\`\`\`
+EOF
+
+    cat > "${ROLE}/tests/inventory" <<EOF
+localhost ansible_connection=local
+EOF
+
+    cat > "${ROLE}/tests/test.yml" <<EOF
+---
+- hosts: localhost
+  become: false
+
+  roles:
+    - ${ROLE}
+EOF
+
+    log_ok "Created role"
+
+    if command_exists realpath
+    then
+        echo
+        echo "    $(realpath "${ROLE}")"
+    fi
+}
+
+main "$@"
