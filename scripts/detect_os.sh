@@ -4,41 +4,9 @@
 # Detect operating system
 ###############################################################################
 
-OS="UNKNOWN"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-case "$(uname -s)" in
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
-Linux)
-
-    if [[ -f /etc/os-release ]]
-    then
-        source /etc/os-release
-
-        case "${ID}" in
-
-            rhel|redhat|rocky|almalinux)
-                OS="RHEL"
-                ;;
-
-            sles|suse)
-                OS="SLES"
-                ;;
-
-            *)
-                OS="${ID}"
-                ;;
-
-        esac
-    fi
-
-    ;;
-
-AIX)
-
-    OS="AIX"
-
-    ;;
-
-esac
-
-echo "${OS}"
+detect_platform
