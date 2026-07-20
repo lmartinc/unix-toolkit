@@ -40,8 +40,6 @@ cat <<EOF
 ============================================================
                  Unix Toolkit Installer v${VERSION}
 ============================================================
-
-
 EOF
 }
 
@@ -60,7 +58,7 @@ cat <<EOF
  Installation completed successfully.
 ============================================================
 
-Elapsed time: ${ELAPSED}
+Elapsed time: ${ELAPSED} seconds
 Restart your shell or run:
 
     source ~/.bashrc
