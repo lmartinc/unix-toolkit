@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+
+###############################################################################
+#
+# Name        : mkproject
+#
+# Description : Create a new Ansible project
+#
+###############################################################################
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+MKROLE="${TOOLKIT_ROOT}/bin/mkrole"
+MKPLAYBOOK="${TOOLKIT_ROOT}/bin/mkplaybook"
+MKSCRIPT="${TOOLKIT_ROOT}/bin/mkscript"
+
+source "${TOOLKIT_ROOT}/lib/common.sh"
+
+usage()
+{
+cat <<EOF
+
+Usage:
+
+    mkproject <project-name>
+
+Example:
+
+    mkproject aix_patch
+
+EOF
+}
+
+main()
+{
+    case "${1:-}" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+    esac
+
+    [[ $# -ne 1 ]] && usage && exit 1
+
+    local PROJECT="$1"
+
+    if [[ -d "${PROJECT}" ]]
+    then
+        log_error "Project already exists."
+        exit 1
+    fi
+
+    log_info "Creating project ${PROJECT}..."
+
+    mkdir -p "${PROJECT}"
+
+mkdir -p \
+    "${PROJECT}/docs" \
+    "${PROJECT}/collections" \
+    "${PROJECT}/inventory/dev" \
+    "${PROJECT}/inventory/test" \
+    "${PROJECT}/inventory/prod" \
+    "${PROJECT}/group_vars" \
+    "${PROJECT}/host_vars" \
+    "${PROJECT}/playbooks" \
+    "${PROJECT}/roles"
+
+    touch "${PROJECT}/inventory/dev/hosts"
+    touch "${PROJECT}/inventory/test/hosts"
+    touch "${PROJECT}/inventory/prod/hosts"
+
+    cp "${TOOLKIT_ROOT}/templates/ansible.cfg" \
+       "${PROJECT}/ansible.cfg"
+
+    cp "${TOOLKIT_ROOT}/templates/requirements.yml" \
+       "${PROJECT}/requirements.yml"
+
+    cp "${TOOLKIT_ROOT}/templates/group_vars_all.yml" \
+       "${PROJECT}/group_vars/all.yml"
+
+    cp "${TOOLKIT_ROOT}/templates/project_README.md" \
+       "${PROJECT}/README.md"
+
+    sed -i \
+        "s/__PROJECT__/${PROJECT}/g" \
+        "${PROJECT}/README.md"
+
+    (
+        cd "${PROJECT}/roles"
+        ${MKROLE} "${PROJECT}"
+    )
+
+    (
+        cd "${PROJECT}/playbooks"
+        ${MKPLAYBOOK} "${PROJECT}"
+    )
+
+    log_ok "Project created"
+
+    echo
+
+    if command_exists realpath
+    then
+        echo "    $(realpath "${PROJECT}")"
+    else
+        echo "    ${PROJECT}"
+    fi
+
+    echo
+    echo "Next steps:"
+    echo
+    echo "    cd ${PROJECT}"
+    echo "    ansible-galaxy collection install -r requirements.yml"
+    echo
+}
+
+main "$@"

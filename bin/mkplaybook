@@ -103,7 +103,7 @@ main()
         msg: "Hello from ${NAME%.yml}"
 EOF
 
-    log_ok "Created playbook"
+    log_ok "Created ansible playbook"
 
     echo
 

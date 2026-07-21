@@ -102,7 +102,7 @@ EOF
     - ${ROLE}
 EOF
 
-    log_ok "Created role"
+    log_ok "Created ansible role"
 
     if command_exists realpath
     then

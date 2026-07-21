@@ -1,0 +1,14 @@
+---
+collections:
+
+  # IBM Power
+  - name: ibm.power_aix
+  - name: ibm.power_hmc
+  - name: ibm.power_vios
+
+  # IBM Storage
+  - name: ibm.storage_virtualize
+
+  # General
+  - name: ansible.posix
+  - name: community.general
