@@ -15,5 +15,5 @@ instead of SSH.
 
 Configure Git proxy settings:
 
-git config --global https.proxy http:username:password@//proxy.server:port
+git config --global https.proxy https://username:password@proxy.server:port
 git remote -v 
