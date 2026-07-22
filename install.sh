@@ -59,6 +59,9 @@ cat <<EOF
  Installation completed successfully.
 ============================================================
 
+✓ Toolkit commands installed to ~/bin
+✓ ~/bin added to your PATH
+
 Elapsed time : ${ELAPSED} seconds
 
 Restart your shell or run:

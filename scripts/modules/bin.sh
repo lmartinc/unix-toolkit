@@ -23,3 +23,16 @@ do
 done
 
 log_ok "Toolkit commands installed."
+
+ensure_path()
+{
+    local LINE='export PATH="$HOME/bin:$PATH"'
+
+    grep -Fxq "${LINE}" "${HOME}/.bashrc" || {
+        {
+            echo
+            echo "# Unix Toolkit"
+            echo "${LINE}"
+        } >> "${HOME}/.bashrc"
+    }
+}
