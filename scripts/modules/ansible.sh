@@ -5,9 +5,10 @@
 ###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_HOME="${HOME}/.unix-toolkit"
+TOOLKIT_HOME="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 source "${TOOLKIT_HOME}/lib/common.sh"
+
 
 log_info "Installing Ansible configuration..."
 
