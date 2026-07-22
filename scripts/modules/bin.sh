@@ -9,6 +9,25 @@ TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
 
+log_info "Installing toolkit runtime..."
+
+mkdir -p "${HOME}/.unix-toolkit"
+
+cp -r \
+    "${TOOLKIT_ROOT}/lib" \
+    "${HOME}/.unix-toolkit/"
+
+cp -r \
+    "${TOOLKIT_ROOT}/templates" \
+    "${HOME}/.unix-toolkit/"
+
+log_ok "Toolkit runtime installed."
+
+
+###############################################################################
+# Install commands
+###############################################################################
+
 log_info "Installing toolkit commands..."
 
 mkdir -p "${HOME}/bin"
@@ -24,15 +43,26 @@ done
 
 log_ok "Toolkit commands installed."
 
+
+###############################################################################
+# Configure PATH
+###############################################################################
+
 ensure_path()
 {
     local LINE='export PATH="$HOME/bin:$PATH"'
 
-    grep -Fxq "${LINE}" "${HOME}/.bashrc" || {
+    if ! grep -Fxq "${LINE}" "${HOME}/.bashrc"
+    then
         {
             echo
             echo "# Unix Toolkit"
             echo "${LINE}"
         } >> "${HOME}/.bashrc"
-    }
+
+        log_ok "~/bin added to PATH"
+    fi
 }
+
+
+ensure_path
