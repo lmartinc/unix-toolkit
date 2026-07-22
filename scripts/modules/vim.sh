@@ -5,12 +5,12 @@
 ###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_HOME="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-source "${TOOLKIT_HOME}/lib/common.sh"
+source "${TOOLKIT_ROOT}/lib/common.sh"
 
 install_file \
-    "${TOOLKIT_HOME}/vim/vimrc" \
+    "${TOOLKIT_ROOT}/vim/vimrc" \
     "${HOME}/.vimrc"
 
 log_ok "Vim configuration installed."
