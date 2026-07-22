@@ -14,11 +14,11 @@ TOOLKIT_HOME="${HOME}/.unix-toolkit"
 
 source "${TOOLKIT_HOME}/lib/common.sh"
 
-MKROLE="${TOOLKIT_ROOT}/bin/mkrole"
-MKPLAYBOOK="${TOOLKIT_ROOT}/bin/mkplaybook"
-MKSCRIPT="${TOOLKIT_ROOT}/bin/mkscript"
+MKROLE="${TOOLKIT_HOME}/bin/mkrole"
+MKPLAYBOOK="${TOOLKIT_HOME}/bin/mkplaybook"
+MKSCRIPT="${TOOLKIT_HOME}/bin/mkscript"
 
-source "${TOOLKIT_ROOT}/lib/common.sh"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 usage()
 {
@@ -73,16 +73,16 @@ mkdir -p \
     touch "${PROJECT}/inventory/test/hosts"
     touch "${PROJECT}/inventory/prod/hosts"
 
-    cp "${TOOLKIT_ROOT}/templates/ansible.cfg" \
+    cp "${TOOLKIT_HOME}/templates/ansible.cfg" \
        "${PROJECT}/ansible.cfg"
 
-    cp "${TOOLKIT_ROOT}/templates/requirements.yml" \
+    cp "${TOOLKIT_HOME}/templates/requirements.yml" \
        "${PROJECT}/requirements.yml"
 
-    cp "${TOOLKIT_ROOT}/templates/group_vars_all.yml" \
+    cp "${TOOLKIT_HOME}/templates/group_vars_all.yml" \
        "${PROJECT}/group_vars/all.yml"
 
-    cp "${TOOLKIT_ROOT}/templates/project_README.md" \
+    cp "${TOOLKIT_HOME}/templates/project_README.md" \
        "${PROJECT}/README.md"
 
     sed -i \

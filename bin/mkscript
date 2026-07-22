@@ -53,7 +53,7 @@ main()
     require_command sed
 
     local SCRIPT_NAME="$1"
-    local TEMPLATE_DIR="${TOOLKIT_ROOT}/templates"
+    local TEMPLATE_DIR="${TOOLKIT_HOME}/templates"
     local TEMPLATE="${TEMPLATE_DIR}/script.sh"
 
     if [[ ! -f "${TEMPLATE}" ]]
