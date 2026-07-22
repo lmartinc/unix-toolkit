@@ -5,24 +5,24 @@
 ###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+TOOLKIT_HOME="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-source "${TOOLKIT_ROOT}/lib/common.sh"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 install_file \
-    "${TOOLKIT_ROOT}/bash/bashrc" \
+    "${TOOLKIT_HOME}/bash/bashrc" \
     "${HOME}/.bashrc"
 
 install_file \
-    "${TOOLKIT_ROOT}/bash/aliases" \
+    "${TOOLKIT_HOME}/bash/aliases" \
     "${HOME}/.bash_aliases"
 
 install_file \
-    "${TOOLKIT_ROOT}/bash/prompt" \
+    "${TOOLKIT_HOME}/bash/prompt" \
     "${HOME}/.bash_prompt"
 
 install_file \
-    "${TOOLKIT_ROOT}/bash/functions" \
+    "${TOOLKIT_HOME}/bash/functions" \
     "${HOME}/.bash_functions"
 
 log_ok "Bash configuration installed."

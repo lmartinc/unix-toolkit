@@ -4,9 +4,9 @@
 # Backup existing configuration files
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+TOOLKIT_HOME="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-source "${TOOLKIT_ROOT}/lib/common.sh"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 BACKUP_DIR="$HOME/.unix-toolkit-backup-$(date +%Y%m%d%H%M%S)"
 

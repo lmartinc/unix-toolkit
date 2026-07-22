@@ -5,20 +5,24 @@
 ###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+TOOLKIT_HOME="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-source "${TOOLKIT_ROOT}/lib/common.sh"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 log_info "Installing toolkit runtime..."
 
 mkdir -p "${HOME}/.unix-toolkit"
 
 cp -r \
-    "${TOOLKIT_ROOT}/lib" \
+    "${TOOLKIT_HOME}/lib" \
     "${HOME}/.unix-toolkit/"
 
 cp -r \
-    "${TOOLKIT_ROOT}/templates" \
+    "${TOOLKIT_HOME}/templates" \
+    "${HOME}/.unix-toolkit/"
+
+cp -r \
+    "${TOOLKIT_HOME}/bin" \
     "${HOME}/.unix-toolkit/"
 
 log_ok "Toolkit runtime installed."
@@ -34,7 +38,7 @@ mkdir -p "${HOME}/bin"
 
 shopt -s nullglob
 
-for tool in "${TOOLKIT_ROOT}/bin"/*
+for tool in "${TOOLKIT_HOME}/bin"/*
 do
     install_command \
         "${tool}" \
