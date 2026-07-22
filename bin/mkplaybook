@@ -9,9 +9,9 @@
 ###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_ROOT="${TOOLKIT_HOME}"
+TOOLKIT_HOME="${HOME}/.unix-toolkit"
 
-source "${TOOLKIT_ROOT}/lib/common.sh"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 ###############################################################################
 # Usage

@@ -9,7 +9,10 @@
 ###############################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_ROOT="${TOOLKIT_HOME}"
+
+TOOLKIT_HOME="${HOME}/.unix-toolkit"
+
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 MKROLE="${TOOLKIT_ROOT}/bin/mkrole"
 MKPLAYBOOK="${TOOLKIT_ROOT}/bin/mkplaybook"
