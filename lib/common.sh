@@ -11,6 +11,7 @@ set -euo pipefail
 ###############################################################################
 
 trap 'error_handler ${LINENO} "${BASH_COMMAND}"' ERR
+export TOOLKIT_HOME="${HOME}/.unix-toolkit"
 
 error_handler()
 {
