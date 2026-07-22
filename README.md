@@ -25,7 +25,20 @@ Currently tested:
 
 ## Installation
 
+## Enterprise Proxy Notes
+
+For Git HTTPS access behind a corporate proxy:
+
+HTTP_PROXY=http://user:password@proxy.example.com:port
+HTTPS_PROXY=http://user:password@proxy.example.com:port
+
+Note:
+HTTPS_PROXY uses http:// because the proxy itself
+is an HTTP CONNECT proxy.
+
 Clone the repository:
+
+mkdir ~/git
 
 ```bash
 git clone https://github.com/lmartinc/unix-toolkit.git

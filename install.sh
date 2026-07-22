@@ -64,9 +64,11 @@ cat <<EOF
 
 Elapsed time : ${ELAPSED} seconds
 
-Restart your shell or run:
+To activate changes in this shell:
 
     source ~/.bashrc
+
+Or simply open a new terminal.
 
 EOF
 }
