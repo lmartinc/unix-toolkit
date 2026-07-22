@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLKIT_HOME="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+ 
+TOOLKIT_HOME="${HOME}/.unix-toolkit"
 
 source "${TOOLKIT_HOME}/lib/common.sh"
 
