@@ -1,4 +1,4 @@
-# Unix Toolkit
+# Unix Toolkit — From Experience to Automation.
 
 A portable toolkit for building a consistent Unix/Linux administration and automation environment.
 
