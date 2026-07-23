@@ -7,12 +7,18 @@
 set -euo pipefail
 
 ###############################################################################
+# Constants
+###############################################################################
+
+export TOOLKIT_HOME="${HOME}/.unix-toolkit"
+
+readonly TOOLKIT_HOME
+
+###############################################################################
 # Error handling
 ###############################################################################
 
 trap 'error_handler ${LINENO} "${BASH_COMMAND}"' ERR
-export TOOLKIT_HOME="${HOME}/.unix-toolkit"
-
 error_handler()
 {
     local line="$1"
@@ -55,9 +61,20 @@ log_error()
     printf "[FAIL] %s\n" "$*"
 }
 
+log_debug()
+{
+    ${VERBOSE:-false} && printf "[DBG ] %s\n" "$*"
+}
+
 ###############################################################################
-# Display environment
+#   User Interface
 ###############################################################################
+
+separator()
+{
+    printf '%*s\n' 60 '' | tr ' ' '-'
+}
+
 
 show_environment()
 {
@@ -71,97 +88,8 @@ show_environment()
 }
 
 ###############################################################################
-# Run installer step
+# Platform detection
 ###############################################################################
-
-run_step()
-{
-    local description="$1"
-    local script="$2"
-
-    printf "%-40s" "${description}"
-
-    if ${DRY_RUN}
-    then
-        printf "[SKIP]\n"
-        return
-    fi
-
-    if ${VERBOSE}
-    then
-        "${script}"
-    else
-        "${script}" >/dev/null 2>&1
-    fi
-
-    printf "[ OK ]\n"
-}
-
-###############################################################################
-# Install configuration file
-###############################################################################
-
-install_file()
-{
-    local source="$1"
-    local destination="$2"
-
-    backup_file "${destination}"
-
-    install -m 644 \
-        "${source}" \
-        "${destination}"
-
-    log_ok "$(basename "${destination}")"
-}
-
-###############################################################################
-# Install executable
-###############################################################################
-
-install_command()
-{
-    local source="$1"
-    local destination="$2"
-
-    install -m 755 \
-        "${source}" \
-        "${destination}"
-
-    log_ok "$(basename "${destination}")"
-}
-
-###############################################################################
-# Backup existing file
-###############################################################################
-
-backup_file()
-{
-    local file="$1"
-
-    if [[ -f "${file}" ]]
-    then
-        cp "${file}" "${file}.$(date +%Y%m%d-%H%M%S).bak"
-
-        log_info "Backed up $(basename "${file}")"
-    fi
-}
-
-###############################################################################
-# Verify command exists
-###############################################################################
-
-require_command()
-{
-    local command="$1"
-
-    command -v "${command}" >/dev/null 2>&1 ||
-    {
-        log_error "${command} is not installed."
-
-        exit 1
-    }
-}
 
 detect_platform()
 {
@@ -202,21 +130,20 @@ detect_platform()
 
     esac
 
+    PLATFORM="${platform}"
+    export PLATFORM
     echo "${platform}"
 }
 
+
 ###############################################################################
-# Check if command exists
+# Validation helpers 
 ###############################################################################
 
 command_exists()
 {
     command -v "$1" >/dev/null 2>&1
 }
-
-###############################################################################
-# Require command
-###############################################################################
 
 require_command()
 {
@@ -227,11 +154,119 @@ require_command()
     fi
 }
 
+require_directory()
+{
+    [[ -d "$1" ]] || {
+
+        log_error "Directory not found: $1"
+
+        exit 1
+    }
+}
+
+
 ###############################################################################
-# Separator
+# File helpers 
 ###############################################################################
 
-separator()
+backup_file()
 {
-    printf '%*s\n' 60 '' | tr ' ' '-'
+    local file="$1"
+
+    if [[ -f "${file}" ]]
+    then
+        cp "${file}" "${file}.$(date +%Y%m%d-%H%M%S).bak"
+
+        log_info "Backed up $(basename "${file}")"
+    fi
 }
+
+install_file()
+{
+    local source="$1"
+    local destination="$2"
+
+    backup_file "${destination}"
+
+    install -m 644 \
+        "${source}" \
+        "${destination}"
+
+    log_ok "$(basename "${destination}")"
+}
+
+install_command()
+{
+    local source="$1"
+    local destination="$2"
+
+    install -m 755 \
+        "${source}" \
+        "${destination}"
+
+    log_ok "$(basename "${destination}")"
+}
+
+create_directory()
+{
+    local directory="$1"
+
+    if [[ ! -d "${directory}" ]]
+    then
+        mkdir -p "${directory}"
+        log_ok "Created ${directory}"
+    else
+	log_debug "Directory exists: ${directory}"
+    fi
+}
+
+copy_template()
+{
+    local template="$1"
+    local destination="$2"
+
+    install_file \
+        "${TOOLKIT_HOME}/templates/${template}" \
+        "${destination}"
+}
+
+require_file()
+{
+    local file="$1"
+
+    [[ -f "${file}" ]] || {
+        log_error "File not found: ${file}"
+        exit 1
+    }
+}
+
+
+###############################################################################
+# Run installer step
+###############################################################################
+
+run_step()
+{
+    local description="$1"
+    local script="$2"
+
+    printf "%-40s" "${description}"
+
+    if ${DRY_RUN}
+    then
+        printf "[SKIP]\n"
+        return
+    fi
+
+    if ${VERBOSE}
+    then
+        "${script}"
+    else
+        "${script}" >/dev/null 2>&1
+    fi
+
+    printf "[ OK ]\n"
+}
+
+
+
