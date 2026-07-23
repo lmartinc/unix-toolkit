@@ -13,6 +13,7 @@ TOOLKIT_HOME="${HOME}/.unix-toolkit"
 source "${TOOLKIT_HOME}/lib/common.sh"
 
 FAILURES=0
+PROJECT="$(basename "$PWD")"
 
 ###############################################################################
 # Usage
@@ -34,23 +35,36 @@ EOF
 }
 
 ###############################################################################
+# Display banner
+###############################################################################
+
+show_banner()
+{
+    echo
+    echo "============================================================"
+    echo "                 Unix Toolkit - ans-check"
+    echo "============================================================"
+    echo
+    echo "Project   : ${PROJECT}"
+    echo "Location  : ${PWD}"
+}
+
+###############################################################################
 # Check project structure
 ###############################################################################
 
 check_project()
 {
-    echo
-    log_info "Checking project structure..."
-    echo
+    section "Project Structure"
 
-    check_file ansible.cfg      || ((FAILURES++))
-    check_file requirements.yml || ((FAILURES++))
+    check_file ansible.cfg          || ((FAILURES++))
+    check_file requirements.yml     || ((FAILURES++))
 
-    check_directory inventory   || ((FAILURES++))
-    check_directory playbooks   || ((FAILURES++))
-    check_directory roles       || ((FAILURES++))
-    check_directory group_vars  || ((FAILURES++))
-    check_directory host_vars   || ((FAILURES++))
+    check_directory inventory       || ((FAILURES++))
+    check_directory playbooks       || ((FAILURES++))
+    check_directory roles           || ((FAILURES++))
+    check_directory group_vars      || ((FAILURES++))
+    check_directory host_vars       || ((FAILURES++))
 }
 
 ###############################################################################
@@ -59,14 +73,12 @@ check_project()
 
 check_commands()
 {
-    echo
-    log_info "Checking required commands..."
-    echo
+    section "Required Commands"
 
-    check_command ansible-playbook || ((FAILURES++))
-    check_command ansible-galaxy   || ((FAILURES++))
-    check_command ansible-lint     || ((FAILURES++))
-    check_command yamllint         || ((FAILURES++))
+    check_command ansible-playbook  || ((FAILURES++))
+    check_command ansible-galaxy    || ((FAILURES++))
+    check_command ansible-lint      || ((FAILURES++))
+    check_command yamllint          || ((FAILURES++))
 }
 
 ###############################################################################
@@ -75,14 +87,17 @@ check_commands()
 
 show_summary()
 {
+    section "Summary"
+
+    echo "Checks completed : $((11))"
+    echo "Failures         : ${FAILURES}"
     echo
-    separator
 
     if (( FAILURES == 0 ))
     then
-        log_ok "Project is healthy."
+        log_ok "Project status : HEALTHY"
     else
-        log_error "${FAILURES} issue(s) detected."
+        log_error "Project status : FAILED"
         exit 1
     fi
 
@@ -102,11 +117,10 @@ main()
             ;;
     esac
 
-    separator
-    echo "                 Unix Toolkit - ans-check"
-    separator
+    show_banner
 
     check_project
+
     check_commands
 
     show_summary

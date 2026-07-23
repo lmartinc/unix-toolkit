@@ -87,6 +87,14 @@ show_environment()
     echo
 }
 
+section()
+{
+    echo
+    separator
+    echo "$1"
+    separator
+}
+
 ###############################################################################
 # Platform detection
 ###############################################################################
@@ -139,6 +147,22 @@ detect_platform()
 ###############################################################################
 # Validation helpers 
 ###############################################################################
+
+check_result()
+{
+    local rc="$1"
+    local ok="$2"
+    local fail="$3"
+
+    if (( rc == 0 ))
+    then
+        log_ok "${ok}"
+    else
+        log_error "${fail}"
+    fi
+
+    return "${rc}"
+}
 
 command_exists()
 {
