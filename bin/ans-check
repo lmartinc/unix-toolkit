@@ -1,7 +1,115 @@
-ansible --version
+#!/usr/bin/env bash
 
-ansible-galaxy collection list
+###############################################################################
+#
+# Name        : ans-check
+#
+# Description : Validate an Ansible project
+#
+###############################################################################
 
-ansible-lint
+TOOLKIT_HOME="${HOME}/.unix-toolkit"
 
-yamllint .
+source "${TOOLKIT_HOME}/lib/common.sh"
+
+FAILURES=0
+
+###############################################################################
+# Usage
+###############################################################################
+
+usage()
+{
+cat <<EOF
+
+Usage:
+
+    ans-check
+
+Description:
+
+    Validate the current Ansible project.
+
+EOF
+}
+
+###############################################################################
+# Check project structure
+###############################################################################
+
+check_project()
+{
+    echo
+    log_info "Checking project structure..."
+    echo
+
+    check_file ansible.cfg      || ((FAILURES++))
+    check_file requirements.yml || ((FAILURES++))
+
+    check_directory inventory   || ((FAILURES++))
+    check_directory playbooks   || ((FAILURES++))
+    check_directory roles       || ((FAILURES++))
+    check_directory group_vars  || ((FAILURES++))
+    check_directory host_vars   || ((FAILURES++))
+}
+
+###############################################################################
+# Check required commands
+###############################################################################
+
+check_commands()
+{
+    echo
+    log_info "Checking required commands..."
+    echo
+
+    check_command ansible-playbook || ((FAILURES++))
+    check_command ansible-galaxy   || ((FAILURES++))
+    check_command ansible-lint     || ((FAILURES++))
+    check_command yamllint         || ((FAILURES++))
+}
+
+###############################################################################
+# Show summary
+###############################################################################
+
+show_summary()
+{
+    echo
+    separator
+
+    if (( FAILURES == 0 ))
+    then
+        log_ok "Project is healthy."
+    else
+        log_error "${FAILURES} issue(s) detected."
+        exit 1
+    fi
+
+    separator
+}
+
+###############################################################################
+# Main
+###############################################################################
+
+main()
+{
+    case "${1:-}" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+    esac
+
+    separator
+    echo "                 Unix Toolkit - ans-check"
+    separator
+
+    check_project
+    check_commands
+
+    show_summary
+}
+
+main "$@"

@@ -181,30 +181,59 @@ backup_file()
     fi
 }
 
-install_file()
+check_command()
 {
-    local source="$1"
-    local destination="$2"
+    local command="$1"
 
-    backup_file "${destination}"
+    if command_exists "${command}"
+    then
+        log_ok "Command : ${command}"
+        return 0
+    fi
 
-    install -m 644 \
-        "${source}" \
-        "${destination}"
+    log_error "Missing command : ${command}"
 
-    log_ok "$(basename "${destination}")"
+    return 1
 }
 
-install_command()
+check_directory()
 {
-    local source="$1"
+    local directory="$1"
+
+    if [[ -d "${directory}" ]]
+    then
+        log_ok "Directory : ${directory}"
+        return 0
+    fi
+
+    log_error "Missing directory : ${directory}"
+
+    return 1
+}
+
+check_file()
+{
+    local file="$1"
+
+    if [[ -f "${file}" ]]
+    then
+        log_ok "File : ${file}"
+        return 0
+    fi
+
+    log_error "Missing file : ${file}"
+
+    return 1
+}
+
+copy_template()
+{
+    local template="$1"
     local destination="$2"
 
-    install -m 755 \
-        "${source}" \
+    install_file \
+        "${TOOLKIT_HOME}/templates/${template}" \
         "${destination}"
-
-    log_ok "$(basename "${destination}")"
 }
 
 create_directory()
@@ -220,15 +249,33 @@ create_directory()
     fi
 }
 
-copy_template()
+
+install_command()
 {
-    local template="$1"
+    local source="$1"
     local destination="$2"
 
-    install_file \
-        "${TOOLKIT_HOME}/templates/${template}" \
+    install -m 755 \
+        "${source}" \
         "${destination}"
+
+    log_ok "$(basename "${destination}")"
 }
+
+install_file()
+{
+    local source="$1"
+    local destination="$2"
+
+    backup_file "${destination}"
+
+    install -m 644 \
+        "${source}" \
+        "${destination}"
+
+    log_ok "$(basename "${destination}")"
+}
+
 
 require_file()
 {
