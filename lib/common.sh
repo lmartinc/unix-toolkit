@@ -66,6 +66,19 @@ log_debug()
     ${VERBOSE:-false} && printf "[DBG ] %s\n" "$*"
 }
 
+log_status()
+{
+    local success="$1"
+    local item="$2"
+    local extra="${3:-}"
+
+    if [[ "${success}" == "true" ]]
+    then
+        printf "[ OK ] %-40s %s\n" "${item}" "${extra}"
+    else
+        printf "[FAIL] %-40s %s\n" "${item}" "${extra}"
+    fi
+}
 ###############################################################################
 #   User Interface
 ###############################################################################

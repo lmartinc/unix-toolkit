@@ -12,8 +12,12 @@ TOOLKIT_HOME="${HOME}/.unix-toolkit"
 
 source "${TOOLKIT_HOME}/lib/common.sh"
 
-FAILURES=0
 PROJECT="$(basename "$PWD")"
+
+CHECKS=0
+FAILURES=0
+
+INSTALLED_COLLECTIONS=""
 
 ###############################################################################
 # Usage
@@ -35,7 +39,7 @@ EOF
 }
 
 ###############################################################################
-# Display banner
+# Banner
 ###############################################################################
 
 show_banner()
@@ -50,6 +54,63 @@ show_banner()
 }
 
 ###############################################################################
+# Load installed collections
+###############################################################################
+
+load_installed_collections()
+{
+    INSTALLED_COLLECTIONS="$(
+        ansible-galaxy collection list |
+        awk '
+            /^[A-Za-z0-9_.-]+/ {
+                print $1, $2
+            }
+        '
+    )"
+}
+
+###############################################################################
+# Read required collections
+###############################################################################
+
+get_required_collections()
+{
+    awk '
+        /name:/ {
+            print $2
+        }
+    ' requirements.yml
+}
+
+###############################################################################
+# Check one collection
+###############################################################################
+
+check_collection()
+{
+    local collection="$1"
+    local installed
+    local version
+
+    installed="$(
+        grep "^${collection}[[:space:]]" <<< "${INSTALLED_COLLECTIONS}"
+    )"
+
+    if [[ -n "${installed}" ]]
+    then
+        version="$(awk '{print $2}' <<< "${installed}")"
+
+        log_status true "${collection}" "${version}"
+
+        return 0
+    fi
+
+    log_status false "${collection}"
+
+    return 1
+}
+
+###############################################################################
 # Check project structure
 ###############################################################################
 
@@ -57,14 +118,26 @@ check_project()
 {
     section "Project Structure"
 
-    check_file ansible.cfg          || ((FAILURES++))
-    check_file requirements.yml     || ((FAILURES++))
+    ((CHECKS++))
+    check_file ansible.cfg || ((FAILURES++))
 
-    check_directory inventory       || ((FAILURES++))
-    check_directory playbooks       || ((FAILURES++))
-    check_directory roles           || ((FAILURES++))
-    check_directory group_vars      || ((FAILURES++))
-    check_directory host_vars       || ((FAILURES++))
+    ((CHECKS++))
+    check_file requirements.yml || ((FAILURES++))
+
+    ((CHECKS++))
+    check_directory inventory || ((FAILURES++))
+
+    ((CHECKS++))
+    check_directory playbooks || ((FAILURES++))
+
+    ((CHECKS++))
+    check_directory roles || ((FAILURES++))
+
+    ((CHECKS++))
+    check_directory group_vars || ((FAILURES++))
+
+    ((CHECKS++))
+    check_directory host_vars || ((FAILURES++))
 }
 
 ###############################################################################
@@ -75,21 +148,49 @@ check_commands()
 {
     section "Required Commands"
 
-    check_command ansible-playbook  || ((FAILURES++))
-    check_command ansible-galaxy    || ((FAILURES++))
-    check_command ansible-lint      || ((FAILURES++))
-    check_command yamllint          || ((FAILURES++))
+    ((CHECKS++))
+    check_command ansible-playbook || ((FAILURES++))
+
+    ((CHECKS++))
+    check_command ansible-galaxy || ((FAILURES++))
+
+    ((CHECKS++))
+    check_command ansible-lint || ((FAILURES++))
+
+    ((CHECKS++))
+    check_command yamllint || ((FAILURES++))
 }
 
 ###############################################################################
-# Show summary
+# Check collections
+###############################################################################
+
+check_collections()
+{
+    section "Collections"
+
+    load_installed_collections
+
+    while read -r collection
+    do
+        [[ -z "${collection}" ]] && continue
+
+        ((CHECKS++))
+
+        check_collection "${collection}" || ((FAILURES++))
+
+    done < <(get_required_collections)
+}
+
+###############################################################################
+# Summary
 ###############################################################################
 
 show_summary()
 {
     section "Summary"
 
-    echo "Checks completed : $((11))"
+    echo "Checks completed : ${CHECKS}"
     echo "Failures         : ${FAILURES}"
     echo
 
@@ -122,6 +223,8 @@ main()
     check_project
 
     check_commands
+
+    check_collections
 
     show_summary
 }
