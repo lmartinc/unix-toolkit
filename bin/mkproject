@@ -43,6 +43,21 @@ main()
     [[ $# -ne 1 ]] && usage && exit 1
 
     local PROJECT="$1"
+    case "$1" in
+
+        /*)
+            PROJECT="$1"
+            ;;
+
+        ./*|../*)
+            PROJECT="$1"
+            ;;
+
+        *)
+            PROJECT="${PROJECTS_HOME}/$1"
+            ;;
+
+    esac
 
     if [[ -d "${PROJECT}" ]]
     then

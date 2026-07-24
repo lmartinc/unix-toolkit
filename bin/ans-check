@@ -209,19 +209,43 @@ show_summary()
 
 main()
 {
+    local PROJECT
+
     case "${1:-}" in
         -h|--help)
             usage
             exit 0
             ;;
+
+        "")
+            PROJECT="$PWD"
+            ;;
+
+        /*)
+            PROJECT="$1"
+            ;;
+
+        ./*|../*)
+            PROJECT="$(realpath "$1")"
+            ;;
+
+        *)
+            PROJECT="${PROJECTS_HOME}/$1"
+            ;;
     esac
 
-    show_banner
+    require_directory "${PROJECT}"
+
+    cd "${PROJECT}"
+
+    banner "ans-check"
+
+    echo "Project   : $(basename "$PWD")"
+    echo "Location  : $PWD"
+    echo
 
     check_project
-
     check_commands
-
     check_collections
 
     show_summary

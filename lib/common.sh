@@ -14,6 +14,9 @@ export TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
 
 readonly TOOLKIT_HOME
 
+export PROJECTS_HOME="${HOME}/projects"
+
+readonly PROJECTS_HOME
 ###############################################################################
 # Error handling
 ###############################################################################
@@ -88,6 +91,16 @@ separator()
     printf '%*s\n' 60 '' | tr ' ' '-'
 }
 
+banner()
+{
+    local utility="$1"
+
+    echo
+    echo "============================================================"
+    printf "                 Unix Toolkit - %s\n" "${utility}"
+    echo "============================================================"
+    echo
+}
 
 show_environment()
 {

@@ -158,6 +158,9 @@ install_all()
 
     run_step "Installing toolkit commands" \
         "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
+    
+    run_step "Creating projects directory" \
+        "${TOOLKIT_ROOT}/scripts/modules/projects.sh"
 }
 
 main()
