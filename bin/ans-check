@@ -116,26 +116,26 @@ check_project()
 {
     section "Project Structure"
 
-    ((CHECKS++))
-    check_file ansible.cfg || ((FAILURES++))
+    ((CHECKS+=1))
+    check_file ansible.cfg || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_file requirements.yml || ((FAILURES++))
+    ((CHECKS+=1))
+    check_file requirements.yml || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_directory inventory || ((FAILURES++))
+    ((CHECKS+=1))
+    check_directory inventory || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_directory playbooks || ((FAILURES++))
+    ((CHECKS+=1))
+    check_directory playbooks || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_directory roles || ((FAILURES++))
+    ((CHECKS+=1))
+    check_directory roles || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_directory group_vars || ((FAILURES++))
+    ((CHECKS+=1))
+    check_directory group_vars || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_directory host_vars || ((FAILURES++))
+    ((CHECKS+=1))
+    check_directory host_vars || ((FAILURES+=1))
 }
 
 ###############################################################################
@@ -146,17 +146,17 @@ check_commands()
 {
     section "Required Commands"
 
-    ((CHECKS++))
-    check_command ansible-playbook || ((FAILURES++))
+    ((CHECKS+=1))
+    check_command ansible-playbook || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_command ansible-galaxy || ((FAILURES++))
+    ((CHECKS+=1))
+    check_command ansible-galaxy || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_command ansible-lint || ((FAILURES++))
+    ((CHECKS+=1))
+    check_command ansible-lint || ((FAILURES+=1))
 
-    ((CHECKS++))
-    check_command yamllint || ((FAILURES++))
+    ((CHECKS+=1))
+    check_command yamllint || ((FAILURES+=1))
 }
 
 ###############################################################################
@@ -173,9 +173,9 @@ check_collections()
     do
         [[ -z "${collection}" ]] && continue
 
-        ((CHECKS++))
+        ((CHECKS+=1))
 
-        check_collection "${collection}" || ((FAILURES++))
+        check_collection "${collection}" || ((FAILURES+=1))
 
     done < <(get_required_collections)
 }
