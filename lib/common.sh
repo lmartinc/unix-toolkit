@@ -10,7 +10,7 @@ set -euo pipefail
 # Constants
 ###############################################################################
 
-export TOOLKIT_HOME="${HOME}/.unix-toolkit"
+export TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
 
 readonly TOOLKIT_HOME
 
