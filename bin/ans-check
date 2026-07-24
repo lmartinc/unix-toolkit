@@ -75,7 +75,7 @@ get_required_collections()
 {
     awk '
         /name:/ {
-            print $2
+            print $NF
         }
     ' requirements.yml
 }
