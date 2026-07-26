@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+###############################################################################
+#
+# Name        : ut
+#
+# Description : Unix Toolkit command
+#
+###############################################################################
+
+source "${HOME}/.unix-toolkit/lib/common.sh"
+
+usage()
+{
+cat <<EOF
+
+Usage:
+
+    ut <command>
+
+Commands:
+
+    version
+    help
+
+EOF
+}
+
+show_version()
+{
+    banner "Toolkit"
+
+    echo "Version    : $(get_version)"
+    echo "Platform   : ${PLATFORM:-$(detect_platform)}"
+    echo "Toolkit    : ${TOOLKIT_HOME}"
+    echo "Projects   : ${PROJECTS_HOME}"
+    echo "Repository : ${HOME}/unix-toolkit"
+
+    echo
+}
+
+case "${1:-}" in
+
+    version|-v|--version)
+
+        show_version
+        ;;
+
+    help|-h|--help)
+
+        usage
+        ;;
+
+    *)
+
+        usage
+        exit 1
+        ;;
+
+esac

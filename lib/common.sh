@@ -44,6 +44,16 @@ error_handler()
 # Logging
 ###############################################################################
 
+log_debug()
+{
+    ${VERBOSE:-false} && printf "[DBG ] %s\n" "$*"
+}
+
+log_error()
+{
+    printf "[FAIL] %s\n" "$*"
+}
+
 log_info()
 {
     printf "[INFO] %s\n" "$*"
@@ -52,21 +62,6 @@ log_info()
 log_ok()
 {
     printf "[ OK ] %s\n" "$*"
-}
-
-log_warn()
-{
-    printf "[WARN] %s\n" "$*"
-}
-
-log_error()
-{
-    printf "[FAIL] %s\n" "$*"
-}
-
-log_debug()
-{
-    ${VERBOSE:-false} && printf "[DBG ] %s\n" "$*"
 }
 
 log_status()
@@ -82,14 +77,15 @@ log_status()
         printf "[FAIL] %-40s %s\n" "${item}" "${extra}"
     fi
 }
+
+log_warn()
+{
+    printf "[WARN] %s\n" "$*"
+}
+
 ###############################################################################
 #   User Interface
 ###############################################################################
-
-separator()
-{
-    printf '%*s\n' 60 '' | tr ' ' '-'
-}
 
 banner()
 {
@@ -102,6 +98,24 @@ banner()
     echo
 }
 
+get_version()
+{
+    cat "${TOOLKIT_HOME}/VERSION"
+}
+
+section()
+{
+    echo
+    separator
+    echo "$1"
+    separator
+}
+
+separator()
+{
+    printf '%*s\n' 60 '' | tr ' ' '-'
+}
+
 show_environment()
 {
     echo "User      : ${USER}"
@@ -111,14 +125,6 @@ show_environment()
     echo
     separator
     echo
-}
-
-section()
-{
-    echo
-    separator
-    echo "$1"
-    separator
 }
 
 ###############################################################################

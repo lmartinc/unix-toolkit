@@ -156,6 +156,9 @@ install_all()
     run_step "Installing Ansible configuration" \
         "${TOOLKIT_ROOT}/scripts/modules/ansible.sh"
 
+    run_step "Installing toolkit metadata" \
+    "${TOOLKIT_ROOT}/scripts/modules/toolkit.sh"
+   
     run_step "Installing toolkit commands" \
         "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
     
