@@ -103,6 +103,11 @@ get_version()
     cat "${TOOLKIT_HOME}/VERSION"
 }
 
+separator()
+{
+    printf '%*s\n' 60 '' | tr ' ' '-'
+}
+
 section()
 {
     echo
@@ -111,17 +116,12 @@ section()
     separator
 }
 
-separator()
-{
-    printf '%*s\n' 60 '' | tr ' ' '-'
-}
-
 show_environment()
 {
     echo "User      : ${USER}"
     echo "Hostname  : $(hostname)"
-    echo "Platform  : ${PLATFORM}"
-    echo "Toolkit   : ${TOOLKIT_ROOT}"
+    echo "Platform  : ${PLATFORM:-unknown}"
+    echo "Toolkit   : ${TOOLKIT_ROOT:-unknown}"
     echo
     separator
     echo
@@ -301,7 +301,7 @@ create_directory()
         mkdir -p "${directory}"
         log_ok "Created ${directory}"
     else
-	log_debug "Directory exists: ${directory}"
+	    log_debug "Directory exists: ${directory}"
     fi
 }
 
@@ -355,13 +355,13 @@ run_step()
 
     printf "%-40s" "${description}"
 
-    if ${DRY_RUN}
+    if ${DRY_RUN:-false}
     then
         printf "[SKIP]\n"
         return
     fi
 
-    if ${VERBOSE}
+    if ${VERBOSE:-false}
     then
         "${script}"
     else
