@@ -10,5 +10,3 @@ TOOLKIT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 source "${TOOLKIT_ROOT}/lib/common.sh" 
 
 create_directory "${PROJECTS_HOME}"
-
-log_ok "Projects directory created."

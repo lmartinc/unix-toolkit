@@ -46,7 +46,12 @@ error_handler()
 
 log_debug()
 {
-    ${VERBOSE:-false} && printf "[DBG ] %s\n" "$*"
+    if [[ "${VERBOSE:-false}" == "true" ]]
+    then
+        printf "[DBG ] %s\n" "$*"
+    fi
+
+    return 0
 }
 
 log_error()
