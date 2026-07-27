@@ -16,6 +16,10 @@ MKROLE="${HOME}/bin/mkrole"
 MKPLAYBOOK="${HOME}/bin/mkplaybook"
 MKSCRIPT="${HOME}/bin/mkscript"
 
+###############################################################################
+# Usage
+###############################################################################
+
 usage()
 {
 cat <<EOF
@@ -31,6 +35,10 @@ Example:
 EOF
 }
 
+###############################################################################
+# Main
+###############################################################################
+
 main()
 {
     case "${1:-}" in
@@ -42,73 +50,84 @@ main()
 
     [[ $# -ne 1 ]] && usage && exit 1
 
-    local PROJECT="$1"
-    case "$1" in
+    local PROJECT_NAME="$1"
+    local PROJECT_DIR=""
+
+    case "${PROJECT_NAME}" in
 
         /*)
-            PROJECT="$1"
+            PROJECT_DIR="${PROJECT_NAME}"
             ;;
 
         ./*|../*)
-            PROJECT="$1"
+            PROJECT_DIR="${PROJECT_NAME}"
             ;;
 
         *)
-            PROJECT="${PROJECTS_HOME}/$1"
+            PROJECT_DIR="${PROJECTS_HOME}/${PROJECT_NAME}"
             ;;
 
     esac
 
-    if [[ -d "${PROJECT}" ]]
+
+    if [[ -d "${PROJECT_DIR}" ]]
     then
-        log_error "Project already exists."
+        log_error "Project already exists: ${PROJECT_DIR}"
         exit 1
     fi
 
-    log_info "Creating project ${PROJECT}..."
 
-    mkdir -p "${PROJECT}"
+    log_info "Creating project ${PROJECT_DIR}..."
 
-mkdir -p \
-    "${PROJECT}/docs" \
-    "${PROJECT}/collections" \
-    "${PROJECT}/inventory/dev" \
-    "${PROJECT}/inventory/test" \
-    "${PROJECT}/inventory/prod" \
-    "${PROJECT}/group_vars" \
-    "${PROJECT}/host_vars" \
-    "${PROJECT}/playbooks" \
-    "${PROJECT}/roles"
+    mkdir -p "${PROJECT_DIR}"
 
-    touch "${PROJECT}/inventory/dev/hosts"
-    touch "${PROJECT}/inventory/test/hosts"
-    touch "${PROJECT}/inventory/prod/hosts"
+    mkdir -p \
+        "${PROJECT_DIR}/docs" \
+        "${PROJECT_DIR}/collections" \
+        "${PROJECT_DIR}/inventory/dev" \
+        "${PROJECT_DIR}/inventory/test" \
+        "${PROJECT_DIR}/inventory/prod" \
+        "${PROJECT_DIR}/group_vars" \
+        "${PROJECT_DIR}/host_vars" \
+        "${PROJECT_DIR}/playbooks" \
+        "${PROJECT_DIR}/roles"
+
+
+    touch "${PROJECT_DIR}/inventory/dev/hosts"
+    touch "${PROJECT_DIR}/inventory/test/hosts"
+    touch "${PROJECT_DIR}/inventory/prod/hosts"
+
 
     cp "${TOOLKIT_HOME}/templates/ansible.cfg" \
-       "${PROJECT}/ansible.cfg"
+       "${PROJECT_DIR}/ansible.cfg"
 
     cp "${TOOLKIT_HOME}/templates/requirements.yml" \
-       "${PROJECT}/requirements.yml"
+       "${PROJECT_DIR}/requirements.yml"
 
     cp "${TOOLKIT_HOME}/templates/group_vars_all.yml" \
-       "${PROJECT}/group_vars/all.yml"
+       "${PROJECT_DIR}/group_vars/all.yml"
 
     cp "${TOOLKIT_HOME}/templates/project_README.md" \
-       "${PROJECT}/README.md"
+       "${PROJECT_DIR}/README.md"
 
-    sed -i \
-        "s/__PROJECT__/${PROJECT}/g" \
-        "${PROJECT}/README.md"
 
-    (
-        cd "${PROJECT}/roles"
-        ${MKROLE} "${PROJECT}"
-    )
+    replace_text \
+        "${PROJECT_DIR}/README.md" \
+        "__PROJECT__" \
+        "${PROJECT_NAME}"
+
 
     (
-        cd "${PROJECT}/playbooks"
-        ${MKPLAYBOOK} "${PROJECT}"
+        cd "${PROJECT_DIR}/roles"
+        ${MKROLE} "${PROJECT_NAME}"
     )
+
+
+    (
+        cd "${PROJECT_DIR}/playbooks"
+        ${MKPLAYBOOK} "${PROJECT_NAME}"
+    )
+
 
     log_ok "Project created"
 
@@ -116,17 +135,19 @@ mkdir -p \
 
     if command_exists realpath
     then
-        echo "    $(realpath "${PROJECT}")"
+        echo "    $(realpath "${PROJECT_DIR}")"
     else
-        echo "    ${PROJECT}"
+        echo "    ${PROJECT_DIR}"
     fi
+
 
     echo
     echo "Next steps:"
     echo
-    echo "    cd ${PROJECT}"
+    echo "    cd ${PROJECT_DIR}"
     echo "    ansible-galaxy collection install -r requirements.yml"
     echo
 }
+
 
 main "$@"

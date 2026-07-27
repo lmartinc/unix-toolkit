@@ -348,6 +348,16 @@ require_file()
     }
 }
 
+replace_text()
+{
+    local file="$1"
+    local search="$2"
+    local replacement="$3"
+
+    sed -i \
+        "s|${search}|${replacement}|g" \
+        "${file}"
+}
 
 ###############################################################################
 # Run installer step
