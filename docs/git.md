@@ -291,8 +291,8 @@ git checkout main
 git pull
     │
     ▼
-git checkout -b feature/my-feature
-    │
+For new feature:  git checkout -b feature/my-feature
+Or switch to existing branch: git checkout feature/my-feature    │
     ▼
 Develop
     │
@@ -379,3 +379,139 @@ git pull
 ```
 
 This keeps both environments synchronized while GitHub remains the single source of truth.
+
+
+Scenario: You're still working on feature/installer
+
+Let's say Monday ends like this:
+
+git add .
+git commit -m "Rename scripts to installer"
+git push
+
+Your work is now safely on GitHub, but still on feature/installer.
+
+Tuesday morning
+
+Go to your repository:
+
+cd ~/git/unix-toolkit
+
+Check where you are:
+
+git status
+git branch
+
+If you're already on feature/installer, simply do:
+
+git pull
+
+That's it.
+
+Git knows that your local feature/installer tracks origin/feature/installer (because of the git push -u origin feature/installer you did the first time).
+
+So git pull means:
+
+"Bring my local feature/installer up to date with GitHub's feature/installer."
+
+No merge with main is involved.
+
+Then continue working:
+
+git add .
+git commit -m "Flatten installer modules"
+git push
+When do you involve main?
+
+Only when the feature is finished.
+
+For example:
+
+feature/installer
+├── Rename scripts
+├── Flatten installer
+├── Update install.sh
+├── Test
+└── Documentation
+
+Once you're happy with everything:
+
+git checkout main
+git pull
+git merge feature/installer
+git push
+
+Now main contains the completed feature.
+
+A typical week
+Monday
+-------
+feature/installer
+commit
+push
+
+Tuesday
+--------
+git pull
+feature/installer
+commit
+push
+
+Wednesday
+----------
+git pull
+feature/installer
+commit
+push
+
+Thursday
+---------
+git pull
+feature/installer
+commit
+push
+
+Friday
+-------
+Tests complete
+↓
+Merge to main
+Why push every day?
+
+Even if you don't merge to main, pushing to GitHub gives you:
+
+A backup of your work.
+The ability to switch machines if needed.
+A complete history of your progress.
+Protection if your laptop has an issue.
+
+That's why we treat GitHub as the source of truth.
+
+The only exception
+
+Suppose while you're working on feature/installer, you also fix a bug directly in main (or someone else updates main).
+
+Before finishing your feature, bring those changes into your branch:
+
+git checkout main
+git pull
+
+git checkout feature/installer
+git merge main
+
+This keeps your feature branch current and helps avoid a big merge conflict later.
+
+Your normal workflow will probably look like this
+
+Start the day
+
+git status
+git pull
+
+Work
+
+git add .
+git commit -m "Meaningful description"
+git push
+
+Repeat until the feature is complete.
