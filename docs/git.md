@@ -503,7 +503,7 @@ This keeps your feature branch current and helps avoid a big merge conflict late
 
 Your normal workflow will probably look like this
 
-Start the day
+Start the day (Windows vscode machine)
 
 git status
 git pull
@@ -513,5 +513,12 @@ Work
 git add .
 git commit -m "Meaningful description"
 git push
+
+On ansible control node (RHEL Machine)
+git status
+git branch -a
+git checkout -b feature/installer origin/feature/installer #Pull branch to rhelcont1
+Test on rhelcont1
+If error's fix on vscode machine and do cycle again.
 
 Repeat until the feature is complete.
