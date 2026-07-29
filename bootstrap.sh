@@ -29,8 +29,8 @@ TOOLKIT_ROOT="${SCRIPT_DIR}"
 ###############################################################################
 
 source "${TOOLKIT_ROOT}/lib/common.sh"
-source "${TOOLKIT_ROOT}scripts/detect_os.sh"
-source "${TOOLKIT_ROOT}/scripts/modules/packages.sh"
+source "${TOOLKIT_ROOT}/installer/detect_os.sh"
+source "${TOOLKIT_ROOT}/installer/packages.sh"
 
 ###############################################################################
 # Constants

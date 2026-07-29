@@ -136,34 +136,34 @@ parse_arguments()
 install_all()
 {
     run_step "Detecting operating system" \
-        "${TOOLKIT_ROOT}/scripts/detect_os.sh"
+        "${TOOLKIT_ROOT}/installer/detect_os.sh"
 
     run_step "Creating directories" \
-        "${TOOLKIT_ROOT}/scripts/create_dirs.sh"
+        "${TOOLKIT_ROOT}/installer/create_dirs.sh"
 
     run_step "Installing system packages" \
-        "${TOOLKIT_ROOT}/scripts/modules/packages.sh"
+        "${TOOLKIT_ROOT}/installer/packages.sh"
 
     run_step "Installing Git configuration" \
-        "${TOOLKIT_ROOT}/scripts/modules/git.sh"
+        "${TOOLKIT_ROOT}/installer/git.sh"
 
     run_step "Installing Bash configuration" \
-        "${TOOLKIT_ROOT}/scripts/modules/bash.sh"
+        "${TOOLKIT_ROOT}/installer/bash.sh"
 
     run_step "Installing Vim configuration" \
-        "${TOOLKIT_ROOT}/scripts/modules/vim.sh"
+        "${TOOLKIT_ROOT}/installer/vim.sh"
 
     run_step "Installing Ansible configuration" \
-        "${TOOLKIT_ROOT}/scripts/modules/ansible.sh"
+        "${TOOLKIT_ROOT}/installer/ansible.sh"
 
     run_step "Installing toolkit commands" \
-        "${TOOLKIT_ROOT}/scripts/modules/bin.sh"
+        "${TOOLKIT_ROOT}/installer/bin.sh"
 
     run_step "Installing toolkit metadata" \
-    "${TOOLKIT_ROOT}/scripts/modules/toolkit.sh"
+        "${TOOLKIT_ROOT}/installer/toolkit.sh"
     
     run_step "Creating projects directory" \
-        "${TOOLKIT_ROOT}/scripts/modules/projects.sh"
+        "${TOOLKIT_ROOT}/installer/projects.sh"
 }
 
 main()
