@@ -21,6 +21,10 @@ cp -r \
     "${TOOLKIT_ROOT}/templates" \
     "${HOME}/.unix-toolkit/"
 
+cp -r \
+    "${TOOLKIT_ROOT}/bin" \
+    "${HOME}/.unix-toolkit/"
+
 log_ok "Toolkit runtime installed."
 
 
