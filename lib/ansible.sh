@@ -105,3 +105,7 @@ check_project()
     ((CHECKS+=1))
     check_directory host_vars || ((FAILURES+=1))
 }
+
+
+
+#
