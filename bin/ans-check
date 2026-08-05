@@ -9,6 +9,7 @@
 ###############################################################################
 
 source "${HOME}/.unix-toolkit/lib/common.sh"
+source "${HOME}/.unix-toolkit/lib/ansible.sh"
 
 PROJECT="$(basename "$PWD")"
 
@@ -49,35 +50,6 @@ show_banner()
     echo
     echo "Project   : ${PROJECT}"
     echo "Location  : ${PWD}"
-}
-
-###############################################################################
-# Load installed collections
-###############################################################################
-
-load_installed_collections()
-{
-    INSTALLED_COLLECTIONS="$(
-        ansible-galaxy collection list |
-        awk '
-            /^[A-Za-z0-9_.-]+/ {
-                print $1, $2
-            }
-        '
-    )"
-}
-
-###############################################################################
-# Read required collections
-###############################################################################
-
-get_required_collections()
-{
-    awk '
-        /name:/ {
-            print $NF
-        }
-    ' requirements.yml
 }
 
 ###############################################################################
