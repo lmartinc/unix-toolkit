@@ -62,6 +62,48 @@ check_collection()
 }
 
 ###############################################################################
+# Check collections
+###############################################################################
+
+check_collections()
+{
+    section "Collections"
+
+    load_installed_collections
+
+    while read -r collection
+    do
+        [[ -z "${collection}" ]] && continue
+
+        ((CHECKS+=1))
+
+        check_collection "${collection}" || ((FAILURES+=1))
+
+    done < <(get_required_collections)
+}
+
+###############################################################################
+# Check required commands
+###############################################################################
+
+check_commands()
+{
+    section "Required Commands"
+
+    ((CHECKS+=1))
+    check_command ansible-playbook || ((FAILURES+=1))
+
+    ((CHECKS+=1))
+    check_command ansible-galaxy || ((FAILURES+=1))
+
+    ((CHECKS+=1))
+    check_command ansible-lint || ((FAILURES+=1))
+
+    ((CHECKS+=1))
+    check_command yamllint || ((FAILURES+=1))
+}
+
+###############################################################################
 # Check project structure
 ###############################################################################
 

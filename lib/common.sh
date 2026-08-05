@@ -92,17 +92,6 @@ log_warn()
 #   User Interface
 ###############################################################################
 
-banner()
-{
-    local utility="$1"
-
-    echo
-    echo "============================================================"
-    printf "                 Unix Toolkit - %s\n" "${utility}"
-    echo "============================================================"
-    echo
-}
-
 get_version()
 {
     cat "${TOOLKIT_HOME}/VERSION"
@@ -119,6 +108,21 @@ section()
     separator
     echo "$1"
     separator
+}
+
+show_banner()
+{
+    local utility="$1"
+
+    echo
+    echo "============================================================"
+    printf "                 Unix Toolkit - %s\n" "${utility}"
+    echo "============================================================"
+    echo
+
+    [[ -n "${PROJECT:-}" ]] && printf "Project   : %s\n" "${PROJECT}"
+    printf "Location  : %s\n" "$(pwd)"
+    echo
 }
 
 show_environment()
