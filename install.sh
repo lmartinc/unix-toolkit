@@ -154,7 +154,7 @@ install_all()
         "${TOOLKIT_ROOT}/installer/vim.sh"
 
     run_step "Installing Ansible configuration" \
-        "${TOOLKIT_ROOT}/installer/ansible.sh"
+        "${TOOLKIT_ROOT}/installer/ansible-core.sh"
 
     run_step "Installing toolkit commands" \
         "${TOOLKIT_ROOT}/installer/bin.sh"
