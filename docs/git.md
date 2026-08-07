@@ -522,3 +522,5 @@ Test on rhelcont1
 If error's fix on vscode machine and do cycle again.
 
 Repeat until the feature is complete.
+Note: Run the following to add execute permission to scripts or files where needed
+find . -type f -name "*.sh" -exec git update-index --chmod=+x {} \;
