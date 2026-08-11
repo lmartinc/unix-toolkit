@@ -8,8 +8,9 @@
 #
 ###############################################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${HOME}/.unix-toolkit/lib/common.sh"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
+
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 ###############################################################################
 # Usage
@@ -27,7 +28,9 @@ Example:
 
     mkplaybook patch_aix
 
-Creates a new Ansible playbook.
+Description:
+
+    Create a new Ansible playbook.
 
 EOF
 }
@@ -39,10 +42,12 @@ EOF
 main()
 {
     case "${1:-}" in
+
         -h|--help)
             usage
             exit 0
             ;;
+
     esac
 
     if [[ $# -ne 1 ]]
@@ -51,45 +56,45 @@ main()
         exit 1
     fi
 
-    local NAME="$1"
+    local name="$1"
 
     #
     # Append .yml if omitted
     #
-    [[ "${NAME}" != *.yml ]] && NAME="${NAME}.yml"
+    [[ "${name}" != *.yml ]] && name="${name}.yml"
 
-    local PLAYBOOK_DIR
+    local playbook_dir
 
     #
     # If inside an Ansible project, use playbooks/
     #
     if [[ -d "./playbooks" ]]
     then
-        PLAYBOOK_DIR="./playbooks"
+        playbook_dir="./playbooks"
     else
-        PLAYBOOK_DIR="."
+        playbook_dir="."
     fi
 
-    local PLAYBOOK="${PLAYBOOK_DIR}/${NAME}"
+    local playbook="${playbook_dir}/${name}"
 
-    if [[ -f "${PLAYBOOK}" ]]
+    if [[ -f "${playbook}" ]]
     then
         log_error "Playbook already exists."
-        echo "    ${PLAYBOOK}"
+        echo "    ${playbook}"
         exit 1
     fi
 
-    cat > "${PLAYBOOK}" <<EOF
+    cat > "${playbook}" <<EOF
 ---
 ###############################################################################
 #
-# Name        : ${NAME}
+# Name        : ${name}
 #
 # Description :
 #
 ###############################################################################
 
-- name: ${NAME%.yml}
+- name: ${name%.yml}
   hosts: all
   gather_facts: true
   become: false
@@ -98,18 +103,18 @@ main()
 
     - name: Example task
       ansible.builtin.debug:
-        msg: "Hello from ${NAME%.yml}"
+        msg: "Hello from ${name%.yml}"
 EOF
 
-    log_ok "Created ansible playbook"
+    log_ok "Created Ansible playbook"
 
     echo
 
     if command_exists realpath
     then
-        echo "    $(realpath "${PLAYBOOK}")"
+        echo "    $(realpath "${playbook}")"
     else
-        echo "    ${PLAYBOOK}"
+        echo "    ${playbook}"
     fi
 
     echo
