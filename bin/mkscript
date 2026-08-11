@@ -8,23 +8,29 @@
 #
 ###############################################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${HOME}/.unix-toolkit/lib/common.sh"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
+
+source "${TOOLKIT_HOME}/lib/common.sh"
+
 ###############################################################################
 # Usage
 ###############################################################################
 
 usage()
 {
-    cat <<EOF
+cat <<EOF
 
 Usage:
+
     mkscript <script-name>
 
 Example:
+
     mkscript backup_oracle
 
-Creates a new shell script using the Unix Toolkit template.
+Description:
+
+    Create a new shell script using the Unix Toolkit template.
 
 EOF
 }
@@ -36,10 +42,12 @@ EOF
 main()
 {
     case "${1:-}" in
+
         -h|--help)
             usage
             exit 0
             ;;
+
     esac
 
     if [[ $# -ne 1 ]]
@@ -48,44 +56,37 @@ main()
         exit 1
     fi
 
-    require_command sed
+    local script_name="$1"
+    local template="${TOOLKIT_HOME}/templates/script.sh"
 
-    local SCRIPT_NAME="$1"
-    local TEMPLATE_DIR="${TOOLKIT_HOME}/templates"
-    local TEMPLATE="${TEMPLATE_DIR}/script.sh"
+    require_file "${template}"
 
-    if [[ ! -f "${TEMPLATE}" ]]
+    if [[ -e "${script_name}" ]]
     then
-        log_error "Template not found:"
-        echo "    ${TEMPLATE}"
+        log_error "File already exists: ${script_name}"
         exit 1
     fi
 
-    if [[ -e "${SCRIPT_NAME}" ]]
-    then
-        log_error "File already exists:"
-        echo "    ${SCRIPT_NAME}"
-        exit 1
-    fi
-
-    cp "${TEMPLATE}" "${SCRIPT_NAME}"
+    install_file \
+        "${template}" \
+        "${script_name}"
 
     sed -i \
-        -e "s/__SCRIPT_NAME__/$(basename "${SCRIPT_NAME}")/g" \
+        -e "s/__SCRIPT_NAME__/$(basename "${script_name}")/g" \
         -e "s/__DATE__/$(date +%Y-%m-%d)/g" \
-        "${SCRIPT_NAME}"
+        "${script_name}"
 
-    chmod 755 "${SCRIPT_NAME}"
+    chmod 755 "${script_name}"
 
-    log_ok "Created script"
+    log_ok "Created shell script"
+
+    echo
 
     if command_exists realpath
     then
-        echo
-        echo "    $(realpath "${SCRIPT_NAME}")"
+        echo "    $(realpath "${script_name}")"
     else
-        echo
-        echo "    $(pwd)/${SCRIPT_NAME}"
+        echo "    $(pwd)/${script_name}"
     fi
 
     echo
