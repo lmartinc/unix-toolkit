@@ -8,13 +8,12 @@
 #
 ###############################################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
 
-source "${HOME}/.unix-toolkit/lib/common.sh"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
-MKROLE="${HOME}/bin/mkrole"
-MKPLAYBOOK="${HOME}/bin/mkplaybook"
-MKSCRIPT="${HOME}/bin/mkscript"
+MKROLE="${TOOLKIT_HOME}/bin/mkrole"
+MKPLAYBOOK="${TOOLKIT_HOME}/bin/mkplaybook"
 
 ###############################################################################
 # Usage
@@ -32,6 +31,10 @@ Example:
 
     mkproject aix_patch
 
+Description:
+
+    Create a new Ansible project.
+
 EOF
 }
 
@@ -42,92 +45,93 @@ EOF
 main()
 {
     case "${1:-}" in
+
         -h|--help)
             usage
             exit 0
             ;;
-    esac
-
-    [[ $# -ne 1 ]] && usage && exit 1
-
-    local PROJECT_NAME="$1"
-    local PROJECT_DIR=""
-
-    case "${PROJECT_NAME}" in
-
-        /*)
-            PROJECT_DIR="${PROJECT_NAME}"
-            ;;
-
-        ./*|../*)
-            PROJECT_DIR="${PROJECT_NAME}"
-            ;;
-
-        *)
-            PROJECT_DIR="${PROJECTS_HOME}/${PROJECT_NAME}"
-            ;;
 
     esac
 
-
-    if [[ -d "${PROJECT_DIR}" ]]
+    if [[ $# -ne 1 ]]
     then
-        log_error "Project already exists: ${PROJECT_DIR}"
+        usage
         exit 1
     fi
 
+    local project_name="$1"
+    local project_dir
 
-    log_info "Creating project ${PROJECT_DIR}..."
+    case "${project_name}" in
 
-    mkdir -p "${PROJECT_DIR}"
+        /*)
+            project_dir="${project_name}"
+            ;;
+
+        ./*|../*)
+            project_dir="${project_name}"
+            ;;
+
+        *)
+            project_dir="${PROJECTS_HOME}/${project_name}"
+            ;;
+
+    esac
+
+    if [[ -d "${project_dir}" ]]
+    then
+        log_error "Project already exists: ${project_dir}"
+        exit 1
+    fi
+
+    log_info "Creating project ${project_dir}..."
 
     mkdir -p \
-        "${PROJECT_DIR}/docs" \
-        "${PROJECT_DIR}/collections" \
-        "${PROJECT_DIR}/inventory/dev" \
-        "${PROJECT_DIR}/inventory/test" \
-        "${PROJECT_DIR}/inventory/prod" \
-        "${PROJECT_DIR}/group_vars" \
-        "${PROJECT_DIR}/host_vars" \
-        "${PROJECT_DIR}/playbooks" \
-        "${PROJECT_DIR}/roles"
+        "${project_dir}/docs" \
+        "${project_dir}/collections" \
+        "${project_dir}/inventory/dev" \
+        "${project_dir}/inventory/test" \
+        "${project_dir}/inventory/prod" \
+        "${project_dir}/group_vars" \
+        "${project_dir}/host_vars" \
+        "${project_dir}/playbooks" \
+        "${project_dir}/roles"
 
+    touch \
+        "${project_dir}/inventory/dev/hosts" \
+        "${project_dir}/inventory/test/hosts" \
+        "${project_dir}/inventory/prod/hosts"
 
-    touch "${PROJECT_DIR}/inventory/dev/hosts"
-    touch "${PROJECT_DIR}/inventory/test/hosts"
-    touch "${PROJECT_DIR}/inventory/prod/hosts"
+    install_file \
+        "${TOOLKIT_HOME}/templates/ansible.cfg" \
+        "${project_dir}/ansible.cfg"
 
+    install_file \
+        "${TOOLKIT_HOME}/templates/requirements.yml" \
+        "${project_dir}/requirements.yml"
 
-    cp "${TOOLKIT_HOME}/templates/ansible.cfg" \
-       "${PROJECT_DIR}/ansible.cfg"
+    install_file \
+        "${TOOLKIT_HOME}/templates/group_vars_all.yml" \
+        "${project_dir}/group_vars/all.yml"
 
-    cp "${TOOLKIT_HOME}/templates/requirements.yml" \
-       "${PROJECT_DIR}/requirements.yml"
-
-    cp "${TOOLKIT_HOME}/templates/group_vars_all.yml" \
-       "${PROJECT_DIR}/group_vars/all.yml"
-
-    cp "${TOOLKIT_HOME}/templates/project_README.md" \
-       "${PROJECT_DIR}/README.md"
-
+    install_file \
+        "${TOOLKIT_HOME}/templates/project_README.md" \
+        "${project_dir}/README.md"
 
     replace_text \
-        "${PROJECT_DIR}/README.md" \
+        "${project_dir}/README.md" \
         "__PROJECT__" \
-        "${PROJECT_NAME}"
-
-
-    (
-        cd "${PROJECT_DIR}/roles"
-        ${MKROLE} "${PROJECT_NAME}"
-    )
-
+        "${project_name}"
 
     (
-        cd "${PROJECT_DIR}/playbooks"
-        ${MKPLAYBOOK} "${PROJECT_NAME}"
+        cd "${project_dir}/roles"
+        "${MKROLE}" "${project_name}"
     )
 
+    (
+        cd "${project_dir}/playbooks"
+        "${MKPLAYBOOK}" "${project_name}"
+    )
 
     log_ok "Project created"
 
@@ -135,19 +139,17 @@ main()
 
     if command_exists realpath
     then
-        echo "    $(realpath "${PROJECT_DIR}")"
+        echo "    $(realpath "${project_dir}")"
     else
-        echo "    ${PROJECT_DIR}"
+        echo "    ${project_dir}"
     fi
-
 
     echo
     echo "Next steps:"
     echo
-    echo "    cd ${PROJECT_DIR}"
+    echo "    cd ${project_dir}"
     echo "    ansible-galaxy collection install -r requirements.yml"
     echo
 }
-
 
 main "$@"
