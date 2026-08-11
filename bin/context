@@ -1,36 +1,60 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-echo "================================="
-echo " System Context"
-echo "================================="
+###############################################################################
+#
+# Name        : context
+#
+# Description : Display system context information
+#
+###############################################################################
 
-echo "Hostname     : $(hostname)"
-echo "User         : $(whoami)"
-echo "Architecture : $(uname -m)"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
 
-case "$(uname -s)" in
+source "${TOOLKIT_HOME}/lib/common.sh"
 
-Linux)
+###############################################################################
+# Main
+###############################################################################
 
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        echo "OS           : $PRETTY_NAME"
-    fi
-    ;;
+main()
+{
+    show_banner "context"
 
-AIX)
+    printf "Hostname     : %s\n" "$(hostname)"
+    printf "User         : %s\n" "$(whoami)"
+    printf "Architecture : %s\n" "$(uname -m)"
 
-    echo "OS           : AIX"
-    echo "Version      : $(oslevel -s)"
-    ;;
+    case "$(uname -s)" in
 
-*)
+        Linux)
 
-    echo "OS           : Unknown"
+            if [[ -f /etc/os-release ]]
+            then
+                source /etc/os-release
+                printf "OS           : %s\n" "${PRETTY_NAME}"
+            fi
 
-esac
+            ;;
 
-echo "Kernel       : $(uname -r)"
-echo "Shell        : $SHELL"
+        AIX)
 
-echo "================================="
+            printf "OS           : AIX\n"
+            printf "Version      : %s\n" "$(oslevel -s)"
+
+            ;;
+
+        *)
+
+            printf "OS           : Unknown\n"
+
+            ;;
+
+    esac
+
+    printf "Kernel       : %s\n" "$(uname -r)"
+    printf "Shell        : %s\n" "${SHELL:-Unknown}"
+
+    echo
+}
+
+main "$@"

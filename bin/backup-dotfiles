@@ -1,26 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+###############################################################################
 #
-# Backup existing configuration files
+# Name        : backup-dotfiles
+#
+# Description : Backup existing user configuration files
+#
+###############################################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${HOME}/.unix-toolkit/lib/common.sh"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
 
-BACKUP_DIR="$HOME/.unix-toolkit-backup-$(date +%Y%m%d%H%M%S)"
+source "${TOOLKIT_HOME}/lib/common.sh"
 
-mkdir -p "$BACKUP_DIR"
+BACKUP_DIR="${HOME}/.unix-toolkit-backup-$(date +%Y%m%d%H%M%S)"
 
-for FILE in .bashrc .vimrc .gitconfig
+mkdir -p "${BACKUP_DIR}"
+
+for file in .bashrc .vimrc .gitconfig
 do
-
-    if [ -f "$HOME/$FILE" ]; then
-
-        echo "Backing up $FILE"
-
-        cp "$HOME/$FILE" "$BACKUP_DIR"
-
+    if [[ -f "${HOME}/${file}" ]]
+    then
+        log_info "Backing up ${file}"
+        cp "${HOME}/${file}" "${BACKUP_DIR}/"
     fi
-
 done
 
-echo "Backup stored in $BACKUP_DIR"
+log_ok "Backup stored in ${BACKUP_DIR}"
