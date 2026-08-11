@@ -8,9 +8,9 @@
 #
 ###############################################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${HOME}/.unix-toolkit/lib/common.sh"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
 
+source "${TOOLKIT_HOME}/lib/common.sh"
 
 ###############################################################################
 # Usage
@@ -28,6 +28,10 @@ Example:
 
     mkrole aix_patch
 
+Description:
+
+    Create a new Ansible role structure.
+
 EOF
 }
 
@@ -38,10 +42,12 @@ EOF
 main()
 {
     case "${1:-}" in
+
         -h|--help)
             usage
             exit 0
             ;;
+
     esac
 
     if [[ $# -ne 1 ]]
@@ -50,25 +56,35 @@ main()
         exit 1
     fi
 
-    local ROLE="$1"
+    local role="$1"
 
-    if [[ -d "${ROLE}" ]]
+    if [[ -d "${role}" ]]
     then
-        log_error "Role already exists."
+        log_error "Role already exists: ${role}"
         exit 1
     fi
 
+    log_info "Creating role ${role}..."
+
     mkdir -p \
-        "${ROLE}"/{defaults,files,handlers,meta,tasks,templates,tests,vars}
+        "${role}/defaults" \
+        "${role}/files" \
+        "${role}/handlers" \
+        "${role}/meta" \
+        "${role}/tasks" \
+        "${role}/templates" \
+        "${role}/tests" \
+        "${role}/vars"
 
-    touch "${ROLE}/defaults/main.yml"
-    touch "${ROLE}/handlers/main.yml"
-    touch "${ROLE}/meta/main.yml"
-    touch "${ROLE}/tasks/main.yml"
-    touch "${ROLE}/vars/main.yml"
+    touch \
+        "${role}/defaults/main.yml" \
+        "${role}/handlers/main.yml" \
+        "${role}/meta/main.yml" \
+        "${role}/tasks/main.yml" \
+        "${role}/vars/main.yml"
 
-    cat > "${ROLE}/README.md" <<EOF
-# ${ROLE}
+    cat > "${role}/README.md" <<EOF
+# ${role}
 
 ## Description
 
@@ -81,33 +97,41 @@ TODO
 ## Example
 
 \`\`\`yaml
-- hosts: all
+- name: Example play
+  hosts: all
 
   roles:
-    - ${ROLE}
+    - ${role}
 \`\`\`
 EOF
 
-    cat > "${ROLE}/tests/inventory" <<EOF
+    cat > "${role}/tests/inventory" <<EOF
 localhost ansible_connection=local
 EOF
 
-    cat > "${ROLE}/tests/test.yml" <<EOF
+    cat > "${role}/tests/test.yml" <<EOF
 ---
-- hosts: localhost
+- name: Test ${role} role
+  hosts: localhost
+  connection: local
   become: false
 
   roles:
-    - ${ROLE}
+    - ${role}
 EOF
 
-    log_ok "Created ansible role"
+    log_ok "Created Ansible role"
+
+    echo
 
     if command_exists realpath
     then
-        echo
-        echo "    $(realpath "${ROLE}")"
+        echo "    $(realpath "${role}")"
+    else
+        echo "    ${role}"
     fi
+
+    echo
 }
 
 main "$@"
