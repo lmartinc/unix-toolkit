@@ -1,17 +1,44 @@
 #!/usr/bin/env bash
-#
-#===============================================================================
+
+###############################################################################
 #
 # Name        : network-discover
 #
 # Description : Discover hosts on a network and generate inventory files.
 #
-# Author      : Lance Martincich
-#
-#===============================================================================
+###############################################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${HOME}/.unix-toolkit/lib/common.sh"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
+
+source "${TOOLKIT_HOME}/lib/common.sh"
+
+###############################################################################
+# Usage
+###############################################################################
+
+usage()
+{
+cat <<EOF
+
+Usage:
+
+    network-discover [subnet]
+
+Examples:
+
+    network-discover
+    network-discover 172.25.1.0/24
+
+Description:
+
+    Discover hosts on a network and generate discovery reports.
+
+Default subnet:
+
+    172.25.1.0/24
+
+EOF
+}
 
 ###############################################################################
 # Main
@@ -19,32 +46,52 @@ source "${HOME}/.unix-toolkit/lib/common.sh"
 
 main()
 {
+    case "${1:-}" in
+
+        -h|--help)
+            usage
+            exit 0
+            ;;
+
+    esac
+
+    if [[ $# -gt 1 ]]
+    then
+        usage
+        exit 1
+    fi
+
     require_command nmap
     require_command dig
     require_command awk
+    require_command sed
+    require_command head
 
     local subnet="${1:-172.25.1.0/24}"
     local subnet_name
     local timestamp
+    local output_dir
 
     subnet_name="$(echo "${subnet}" | tr '/' '_')"
     timestamp="$(date +%Y%m%d_%H%M%S)"
 
-    local outdir="${HOME}/unix-toolkit-data/network/${timestamp}"
+    output_dir="${HOME}/unix-toolkit-data/network/${timestamp}"
 
-    mkdir -p "${outdir}/nmap"
+    mkdir -p "${output_dir}/nmap"
 
-    local hosts_file="${outdir}/${subnet_name}_hosts.txt"
-    local csv_file="${outdir}/${subnet_name}_inventory.csv"
-    local xml_file="${outdir}/${subnet_name}.xml"
-    local services_file="${outdir}/services.txt"
+    local hosts_file="${output_dir}/${subnet_name}_hosts.txt"
+    local csv_file="${output_dir}/${subnet_name}_inventory.csv"
+    local xml_file="${output_dir}/${subnet_name}.xml"
+    local services_file="${output_dir}/services.txt"
 
-    log_info "Network Discovery"
-    log_info "Subnet : ${subnet}"
-    log_info "Output : ${outdir}"
+    section "Network Discovery"
 
-    echo "# Generated $(date)" > "${hosts_file}"
-    echo "IP,Hostname,MAC,Vendor" > "${csv_file}"
+    echo "Subnet : ${subnet}"
+    echo "Output : ${output_dir}"
+    echo
+
+    printf "# Generated %s\n" "$(date)" > "${hosts_file}"
+    printf "IP,Hostname,MAC,Vendor\n" > "${csv_file}"
 
     log_info "Running discovery scan..."
 
@@ -61,15 +108,19 @@ main()
     do
         [[ -z "${ip}" ]] && continue
 
-        hostname="$(dig +short -x "${ip}" | sed 's/\.$//' | head -1)"
+        local hostname
+        local mac
+        local vendor
 
+        hostname="$(dig +short -x "${ip}" | sed 's/\.$//' | head -1)"
         [[ -z "${hostname}" ]] && hostname="unknown"
 
         mac="$(nmap -sn "${ip}" | awk '/MAC Address/ {print $3}')"
-
         vendor="$(nmap -sn "${ip}" | awk -F'[()]' '/MAC Address/ {print $2}')"
 
-        printf "%-15s %s\n" "${ip}" "${hostname}" >> "${hosts_file}"
+        printf "%-15s %s\n" \
+            "${ip}" \
+            "${hostname}" >> "${hosts_file}"
 
         printf "%s,%s,%s,%s\n" \
             "${ip}" \
@@ -94,7 +145,7 @@ main()
 
     echo
     echo "Results:"
-    echo "    ${outdir}"
+    echo "    ${output_dir}"
     echo
 }
 

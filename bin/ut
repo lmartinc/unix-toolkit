@@ -4,15 +4,23 @@
 #
 # Name        : ut
 #
-# Description : Unix Toolkit command
+# Description : Unix Toolkit command interface
 #
 ###############################################################################
 
-source "${HOME}/.unix-toolkit/lib/common.sh"
+TOOLKIT_HOME="${TOOLKIT_HOME:-${HOME}/.unix-toolkit}"
+
+source "${TOOLKIT_HOME}/lib/common.sh"
+
+###############################################################################
+# Usage
+###############################################################################
 
 usage()
 {
 cat <<EOF
+
+Unix Toolkit
 
 Usage:
 
@@ -20,15 +28,30 @@ Usage:
 
 Commands:
 
-    version
-    help
+    version       Display toolkit version and environment
+    help          Display this help message
+
+Options:
+
+    -v, --version
+    -h, --help
+
+Examples:
+
+    ut version
+    ut --version
+    ut help
 
 EOF
 }
 
+###############################################################################
+# Version
+###############################################################################
+
 show_version()
 {
-    banner "Toolkit"
+    section "Unix Toolkit"
 
     echo "Version    : $(get_version)"
     echo "Platform   : ${PLATFORM:-$(detect_platform)}"
@@ -39,22 +62,30 @@ show_version()
     echo
 }
 
-case "${1:-}" in
+###############################################################################
+# Main
+###############################################################################
 
-    version|-v|--version)
+main()
+{
+    case "${1:-}" in
 
-        show_version
-        ;;
+        version|-v|--version)
+            show_version
+            ;;
 
-    help|-h|--help)
+        help|-h|--help|"")
+            usage
+            ;;
 
-        usage
-        ;;
+        *)
+            log_error "Unknown command: $1"
+            echo
+            usage
+            exit 1
+            ;;
 
-    *)
+    esac
+}
 
-        usage
-        exit 1
-        ;;
-
-esac
+main "$@"
